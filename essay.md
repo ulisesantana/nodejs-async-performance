@@ -4,7 +4,7 @@ Hola! Soy Ulises Santana y trabajo como Full Stack Developer en Lean Mind donde 
 
 Hoy vengo aquí a hablar de cómo pasé un proceso en Node.js de 5 horas a 5 minutos. Para ello vamos a empezar por lo básico, el contexto. Estaba trabajando para un cliente en un equipo de 5 personas, en el que las otras 4 se habían incorporado en los últimos 3 meses, mientras que yo llevaba casi un año con el cliente. En este equipo mi rol era el de Senior Node.js Developer y era el único que tenía experiencia previa trabajando con Node.js. Aparte había otra persona con experiencia con JavaScript y Dart, lo cual hacía que le resultara fácil adaptarse a los proyectos en TypeScript, que es el lenguaje en el que estaban todos los proyectos. Sin embargo, las otras tres personas del equipo tenían muy poca experiencia previa en JavaScript.
 
-Por otro lado, estábamos trabajando en las distintas partes de un motor de facturación que necesitaba ser adaptado para un cambio legislativo. Esto último significa que el deadline no se puede mover, si el cambio no está hecho para esa fecha la empresa no puede de cobrar, le rompes el cash flow. 
+Por otro lado, estábamos trabajando en las distintas partes de un motor de facturación que necesitaba ser adaptado para un cambio legislativo. Esto último significa que el deadline no se podía mover, si el cambio no estaba hecho para esa fecha la empresa no podía de cobrar. En caso de que no llegáramos le rompíamos el cash flow. 
 
 Por concluir esta contextualización:
 
