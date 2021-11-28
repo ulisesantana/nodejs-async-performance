@@ -1,10 +1,10 @@
 # Cómo pasé un proceso en Node.js de 5 horas a 5 minutos
 
-Hola! Soy Ulises Santana y trabajo como Full Stack Developer en Lean Mind donde ayudamos a otras empresas a hacer que sus proyectos de software sean más sostenibles. Soy de Gran Canaria, pero actualmente vivo en El Hierro desde donde trabajo de forma remota. Tengo una perrita llamada Mocha (en honor al nombre en clave de JavaScript cuando era un prototipo) y un gatete llamado Null. 
+Hola! Soy Ulises Santana y trabajo como Full Stack Developer en Lean Mind donde ayudamos a otras empresas a hacer que sus proyectos de software sean más sostenibles. Soy de Gran Canaria, pero actualmente vivo en El Hierro desde donde trabajo de forma remota. Tengo una perrita llamada Mocha (en honor al nombre en clave de JavaScript cuando Brendan Eich empezó a trabajar en él) y un gatete llamado Null. 
 
 Hoy vengo aquí a hablar de cómo pasé un proceso en Node.js de 5 horas a 5 minutos. Para ello vamos a empezar por lo básico, el contexto. Estaba trabajando para un cliente en un equipo de 5 personas, en el que las otras 4 se habían incorporado en los últimos 3 meses, mientras que yo llevaba casi un año con el cliente. En este equipo mi rol era el de Senior Node.js Developer y era el único que tenía experiencia previa trabajando con Node.js. Aparte había otra persona con experiencia con JavaScript y Dart, lo cual hacía que le resultara fácil adaptarse a los proyectos en TypeScript, que es el lenguaje en el que estaban todos los proyectos. Sin embargo, las otras tres personas del equipo tenían muy poca experiencia previa en JavaScript.
 
-Por otro lado, estábamos trabajando en las distintas partes de un motor de facturación que necesitaba ser adaptado para un cambio legislativo. Esto último significa que el deadline no se podía mover, si el cambio no estaba hecho para esa fecha la empresa no podía de cobrar. En caso de que no llegáramos le rompíamos el cash flow. 
+Por otro lado, estábamos trabajando en las distintas partes de un motor de facturación que necesitaba ser adaptado para un cambio legislativo. Esto último significa que el deadline no se podía mover, si el cambio no estaba hecho para esa fecha la empresa no podía generar la facturación del siguiente mes. En caso de que no llegáramos le rompíamos el cash flow. 
 
 Por concluir esta contextualización:
 
@@ -21,11 +21,11 @@ Esta situación hizo que por falta de tiempo descuidara el proceso de code revie
 
 El *Proyecto Leñador* fue llevado a cabo por miembros del equipo que no tenían mucha experiencia previa en JavaScript y nula en TypeScript. Esto no suponía a priori ningún problema porque ya llevaban tres meses haciendo pair o mob programming con miembros del equipo que sí tenían experiencia previa y estas mismas personas habían hecho aportaciones a los diferentes proyectos en TypeScript. Simplemente pedían ayuda o consejo cuando lo necesitaban y se les asistía.
 
-La realidad es que el salto de calidad era más que evidente. No fue que vi el proyecto en su estado final, sino que lo vi evolucionar a lo largo de las semanas y realmente era mucho más claro en su propósito y no había sorpresas en la implementación. Yo había sido parte del equipo que había hecho ese prototipo 9 meses atrás liderado por otro Senior que ya no estaba en el equipo y la verdad es que había ciertas partes que para mí era un pelín oscuras, que no terminaba de entender cómo funcionaban o cual era su propósito final.
+La realidad es que el salto de calidad era más que evidente. No fue que vi el proyecto en su estado final directamente, sino que lo vi evolucionar a lo largo de las semanas y realmente era mucho más claro en su propósito y no había sorpresas en la implementación. Yo había sido parte del equipo que había hecho ese prototipo 9 meses atrás liderado por otro Senior que ya no estaba en el equipo y la verdad es que había ciertas partes que para mí era un pelín oscuras, que no terminaba de entender cómo funcionaban o cual era su propósito final.
 
-Estaba muy orgulloso de lo que el equipo había conseguido, realmente era un proyecto mucho más sostenible, eliminando sorpresas. Sin embargo, cuando estaba terminado e hice una última revisión algo más extensa con el equipo veía algunos flujos de datos que tenían toda la pinta de bloquear el Event Loop, perdiendo performance. De todos modos, en ese momento tampoco me llevé las manos a la cabeza, así que pasé al siguiente paso que teníamos planeado: hacer una prueba comparando el prototipo con el *Proyecto Leñador* para ver si realmente bajo el mismo input había el mismo output y de paso ver cómo se comportaba a nivel de performance. 
+Estaba muy orgulloso de lo que el equipo había conseguido, realmente era un proyecto mucho más sostenible, eliminando sorpresas. Sin embargo, cuando estaba terminado e hice una última revisión algo más extensa con el equipo veía algunos flujos de datos que tenían toda la pinta de bloquear el Event Loop, perdiendo performance. De todos modos, en ese momento no le di importancia, simplemente pasé al siguiente paso que teníamos planeado: hacer una prueba comparando el prototipo con el *Proyecto Leñador* para ver si realmente bajo el mismo input había el mismo output y de paso ver cómo se comportaba a nivel de performance. 
 
-El prototipo en base a un set de datos de unos cientos de miles de registros era capaz de hacerlo todo en unos 7 minutos. Con el mismo set de datos probé con el *Proyecto Leñador* y el resultado fue que tardó nada más y nada menos que **5 horas 7 minutos y 54 segundos.** Estamos hablando de que tardaba 44 veces más. El proceso real en producción tardaba cada noche unos 40 minutos, por lo que si mandábamos esto a producción el nuevo proceso tardaría unas 29 horas y 20 minutos, esta pérdida de performance era inasumible. En ese momento mi yo interno era algo así:
+El prototipo en base a un set de datos de unos cientos de miles de registros y era capaz de hacerlo todo en unos 7 minutos. Con el mismo set de datos probé con el *Proyecto Leñador* y el resultado fue que tardó nada más y nada menos que **5 horas 7 minutos y 54 segundos.** Estamos hablando de que tardaba 44 veces más. El proceso real en producción tardaba cada noche unos 40 minutos, por lo que si mandábamos esto a producción el nuevo proceso tardaría unas 29 horas y 20 minutos, esta pérdida de performance era inasumible. En ese momento mi yo interno era algo así:
 
 ![](https://media.giphy.com/media/Wr2747CnxwBSqyK6xt/giphy.gif) 
 
@@ -46,7 +46,7 @@ Si vas a hacer un await en el que le vas a pasar un array de elementos y ese arr
 
 ### 2. Evita los await dentro de los bucles.
 
-### 3. Usa Promise.all siempre que puedas
+### 3. Usa Promise.all siempre que puedas, el Promise.allSettled también existe
 
 ### 4. Si no sabes cuántas promesas vas a tener en un Promise.all usa p-map y limita la concurrencia
 
@@ -56,7 +56,7 @@ Si vas a hacer un await en el que le vas a pasar un array de elementos y ese arr
 
 Esto no es exclusivo de Node.js, pero era algo que no estábamos haciendo y que podía ayudar, ya que había ciertos datos que no cambiaban durante la ejecución y que no venía mal tenerlos cacheados. 
 
-Lo que sí es exclusivo de Node.js es cómo cachear esta clase de datos. No cacheas el valor, sino la promesa que te devuelve. 
+Lo que sí es exclusivo de Node.js es cómo cachear esta clase de datos. No cacheas el valor, sino la promesa que te devuelve. Ya después cuando coges la promesa cacheada la resuelves y ya.
 
 ### 7. Haz caso de los warnings
 
@@ -68,7 +68,7 @@ En la consola al ejecutar el proceso me salía esto:
 (node) warning: possible EventEmitter memory leak detected. 11 listeners added. Use emitter.setMaxListeners() to increase limit.
 ```
 
-Yo penaba *Meh, es un warning*. En una primera instancia simplemente hice lo que me decía y aumenté los listeners. Sin embargo, hasta que no me dediqué a limpiar los listeners a medida que los usaba no noté la mejora de performance. No era un posible memory leak, era un memory leak en toda regla.
+Yo pensaba *Meh, es un warning*. En una primera instancia simplemente hice lo que me decía y aumenté los listeners. Sin embargo, hasta que no me dediqué a limpiar los listeners a medida que los usaba no noté la mejora de performance. No era un posible memory leak, era un memory leak en toda regla.
 
 El problema era que había event handlers que se estaban creando continuamente con cada conexión que se solicitaba al pool de conexiones a la base de datos, pero que no se estaban eliminando, pudiendo ser el causante del memory leak. Tras implementar un fix en el que cada vez que se devuelve una conexión al pool se limpian los event handlers vimos una mejoría en el performance, bajando 4 veces el tiempo de ejecución.  
 
