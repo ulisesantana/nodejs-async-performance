@@ -46,11 +46,18 @@ Si vas a hacer un await en el que le vas a pasar un array de elementos y ese arr
 
 ### 2. Evita los await dentro de los bucles.
 
+Cada vez que haces un await dentro de un for 
+
+> Debería explicar, al menos por encima, el Event Loop. Entender cómo funciona la asincronía por dentro ayuda mucho a entender lo que pasa cuando gestionas promesas 
+
 ### 3. Usa Promise.all siempre que puedas, el Promise.allSettled también existe
 
 ### 4. Si no sabes cuántas promesas vas a tener en un Promise.all usa p-map y limita la concurrencia
 
+Recordar que la version 5 se hizo versión de modules y nosotros nos quedamos en la 4.
+
 ### 5. Los async iterators pueden ser maravillosos
+Hasta ahora el único uso que les he dado es para leer en lotes de la base de datos.
 
 ### 6. Cachear queries
 
@@ -89,7 +96,7 @@ Aparte de haber mejorado la sostenibilidad del proyecto, habíamos mejorado el p
 
 * Poner ejemplo que es pan con pan y una pulga en medio.
 * Mezclar async/await con Promises
-* Ten en cuenta que cada función asíncrona de por sí devuelve una promesa.
+* Ten en cuenta que cada función asíncrona de por sí devuelve una promesa. Si devuelves una promesa JavaScript tiene que gestionarlo. Comentar ejemplo de jest o incluso hacer un benchmarking. 
 
 ## Cosas que aprendí
 
