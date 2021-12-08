@@ -1,59 +1,37 @@
 export class Benchmark {
-  static #AsyncFunction = (async () => {}).constructor;
+  static #maxTimeInMs = 1000
   #suiteName
-  #amountOfIterations
   #results = []
 
-  constructor(suiteName, amountOfIterations = 1000) {
+  constructor(suiteName) {
     this.#suiteName = suiteName
-    this.#amountOfIterations = amountOfIterations
   }
 
   async add(title, test) {
-    const isAsync = test instanceof Benchmark.#AsyncFunction
-    const results = []
-    const startTotal = Date.now()
-    for (const _index of Array(this.#amountOfIterations).keys()) {
-      const start = Date.now()
-      if (isAsync) {
+    const limit = Date.now() + Benchmark.#maxTimeInMs
+    let totalExecutions = 0
+    while (Date.now() <= limit) {
+      const result = test()
+      if (result instanceof Promise) {
         await test()
-      } else {
-        test()
       }
-      results.push(Date.now() - start)
+      totalExecutions +=1
     }
-    const averageTimeInMs = (results.reduce((total, x) => total + x, 0) / this.#amountOfIterations)
     this.#results.push({
       title,
-      averageTimeInMs,
-      totalTimeInMs: Date.now() - startTotal
+      averageTimeInMs: Benchmark.#maxTimeInMs / totalExecutions,
+      totalExecutions
     })
     console.log(`Added "${title}" for suite "${this.#suiteName}"`)
   }
 
   printResults() {
-    console.log(`${this.#suiteName} for ${Benchmark.#addThousandSeparator(this.#amountOfIterations)} iterations.`)
-    console.table(this.results.map(result => ({
-      ...result,
-      averageTimeInMs: Benchmark.#addThousandSeparator(result.averageTimeInMs),
-      totalTimeInMs: Benchmark.#addThousandSeparator(result.totalTimeInMs)
-    })))
+    console.log(`Results for ${this.#suiteName} benchmark.`)
+    console.table(this.results)
   }
 
   get results() {
-    return [...this.#results].sort((a, b) => a.averageTimeInMs - b.averageTimeInMs)
-  }
-
-  static #addThousandSeparator(number) {
-    return Array.from(String(number))
-      .reverse()
-      .map((n, i, arr) =>
-        n === '.'
-          ? ','
-          : (i + 1) % 3 === 0 && i < arr.length - 1 ? `.${n}` : n
-      )
-      .reverse()
-      .join('')
+    return [...this.#results].sort((a, b) => b.totalExecutions - a.totalExecutions)
   }
 
 }

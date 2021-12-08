@@ -17,13 +17,13 @@ A Abraham Lincoln se le atribuye la siguiente frase: *Dame 6 horas para cortar u
 
 En Lean Mind por regla general trabajamos haciendo pair o mob programming, por lo que nadie nunca está solo y así facilitamos que el código sea más sostenible y que tanto la autoría del código como el conocimiento se comparta. Sin embargo, como teníamos 5 proyectos que actualizar decidimos dividirnos lo máximo posible para poder abarcar al menos 3 proyectos a la vez y poder tener los cambios lo antes posible. Eso sale a 2 personas por proyecto y una persona sola. ¿Adivinan quien es el que se quedó solo? [Levanta la mano y asiente] Sí, fui yo, pero eso no es relevante para esta parte de la historia. Lo que sí es relevante es que durante esa época estaba un poco a full asistiendo a los diferentes equipos a la par que trabajaba en el proyecto en el que me tocaba. 
 
-Esta situación hizo que por falta de tiempo descuidara el proceso de code review y simplemente me centrara en resolver las dudas del equipo sobre todo a nivel de dominio, ya que recuerdo que el resto del equipo llevaba sólo 3 meses con el cliente y el dominio del negocio tenía una curva de asimilación de al menos 6 meses. Además, como hacíamos TDD, si los test pasan y reflejaban bien las especificaciones de negocio no había de qué preocuparse. 
+Esta situación hizo que por falta de tiempo descuidara el proceso de code review y simplemente me centrara en resolver las dudas del equipo sobre todo en dominio, ya que recuerdo que el resto del equipo llevaba solo 3 meses con el cliente y el dominio del negocio tenía una curva de asimilación de al menos 6 meses. Además, como hacíamos TDD, si los test pasan y reflejaban bien las especificaciones de negocio no había de qué preocuparse. 
 
 El *Proyecto Leñador* fue llevado a cabo por miembros del equipo que no tenían mucha experiencia previa en JavaScript y nula en TypeScript. Esto no suponía a priori ningún problema porque ya llevaban tres meses haciendo pair o mob programming con miembros del equipo que sí tenían experiencia previa y estas mismas personas habían hecho aportaciones a los diferentes proyectos en TypeScript. Simplemente pedían ayuda o consejo cuando lo necesitaban y se les asistía.
 
 La realidad es que el salto de calidad era más que evidente. No fue que vi el proyecto en su estado final directamente, sino que lo vi evolucionar a lo largo de las semanas y realmente era mucho más claro en su propósito y no había sorpresas en la implementación. Yo había sido parte del equipo que había hecho ese prototipo 9 meses atrás liderado por otro Senior que ya no estaba en el equipo y la verdad es que había ciertas partes que para mí era un pelín oscuras, que no terminaba de entender cómo funcionaban o cual era su propósito final.
 
-Estaba muy orgulloso de lo que el equipo había conseguido, realmente era un proyecto mucho más sostenible, eliminando sorpresas. Sin embargo, cuando estaba terminado e hice una última revisión algo más extensa con el equipo veía algunos flujos de datos que tenían toda la pinta de bloquear el Event Loop, perdiendo performance. De todos modos, en ese momento no le di importancia, simplemente pasé al siguiente paso que teníamos planeado: hacer una prueba comparando el prototipo con el *Proyecto Leñador* para ver si realmente bajo el mismo input había el mismo output y de paso ver cómo se comportaba a nivel de performance. 
+Estaba muy orgulloso de lo que el equipo había conseguido, realmente era un proyecto mucho más sostenible, eliminando sorpresas. Sin embargo, cuando estaba terminado e hice una última revisión algo más extensa con el equipo veía algunos flujos de datos que tenían toda la pinta de bloquear el Event Loop, perdiendo performance. De todos modos, en ese momento no le di importancia, simplemente pasé al siguiente paso que teníamos planeado: hacer una prueba comparando el prototipo con el *Proyecto Leñador* para ver si realmente bajo el mismo input había el mismo output y de paso ver cómo se comportaba en performance. 
 
 El prototipo en base a un set de datos de unos cientos de miles de registros y era capaz de hacerlo todo en unos 7 minutos. Con el mismo set de datos probé con el *Proyecto Leñador* y el resultado fue que tardó nada más y nada menos que **5 horas 7 minutos y 54 segundos.** Estamos hablando de que tardaba 44 veces más. El proceso real en producción tardaba cada noche unos 40 minutos, por lo que si mandábamos esto a producción el nuevo proceso tardaría unas 29 horas y 20 minutos, esta pérdida de performance era inasumible. En ese momento mi yo interno era algo así:
 
@@ -40,9 +40,11 @@ La realidad es que entré en modo pánico y empecé a refactorizar el proyecto y
 
 Tras este refactor vi ciertos patrones que quiero remarcar y mostrar:
 
-### 1. Evita awaits innecesarios
+### 1. Evita async y awaits innecesarios
 
 Si vas a hacer un await en el que le vas a pasar un array de elementos y ese array de elementos está vacío, no hagas la llamada.
+
+Por otro lado, los async cuando los ponemos en una función, estamos automáticamente haciendo que devuelva una promesa, y eso hay que gestionarlo de más. (_Demo useless-async_)
 
 ### 2. Evita los await dentro de los bucles.
 

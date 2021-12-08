@@ -12,10 +12,12 @@ async function doSomethingAsync() {
   return x ** x
 }
 
-const suite = new Benchmark('Loops', 100)
+const suite = new Benchmark('Loops')
+
 await suite.add('Sync', () => {
   return [...Array(100).keys()].map(doSomething)
 })
+
 await suite.add('Async', async () => {
   const values = []
   for (const _index of Array(100).keys()) {
@@ -23,8 +25,10 @@ await suite.add('Async', async () => {
   }
   return values
 })
+
 await suite.add('Async Promise.all', () => {
   return Promise.all([...Array(100).keys()].map(doSomethingAsync))
 })
+
 suite.printResults()
 
