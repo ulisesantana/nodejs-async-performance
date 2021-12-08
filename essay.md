@@ -40,36 +40,32 @@ La realidad es que entré en modo pánico y empecé a refactorizar el proyecto y
 
 Tras este refactor vi ciertos patrones que quiero remarcar y mostrar:
 
-### 1. Evita async 
+### 1. Evita async innecesarios
 
 Los async cuando los ponemos en una función, estamos automáticamente haciendo que devuelva una promesa, y eso hay que gestionarlo de más. (_Demo useless-async_)
 
-### 2. Evita awaits innecesarios 
-
-Si vas a hacer un await en el que le vas a pasar un array de elementos y ese array de elementos está vacío, no hagas la llamada.
-
-### 3. Evita los await dentro de los bucles.
+### 2. Evita los await dentro de los bucles.
 
 Cada vez que haces un await dentro de un for 
 
 > Debería explicar, al menos por encima, el Event Loop. Entender cómo funciona la asincronía por dentro ayuda mucho a entender lo que pasa cuando gestionas promesas 
 
-### 4. Usa Promise.all siempre que puedas, el Promise.allSettled también existe
+### 3. Usa Promise.all siempre que puedas, el Promise.allSettled también existe
 
-### 5. Si no sabes cuántas promesas vas a tener en un Promise.all usa p-map y limita la concurrencia
+### 4. Si no sabes cuántas promesas vas a tener en un Promise.all usa p-map y limita la concurrencia
 
 Recordar que la version 5 se hizo versión de modules y nosotros nos quedamos en la 4.
 
-### 6. Los async iterators pueden ser maravillosos
+### 5. Los async iterators pueden ser maravillosos
 Hasta ahora el único uso que les he dado es para leer en lotes de la base de datos.
 
-### 7. Cachear queries
+### 6. Cachear queries
 
 Esto no es exclusivo de Node.js, pero era algo que no estábamos haciendo y que podía ayudar, ya que había ciertos datos que no cambiaban durante la ejecución y que no venía mal tenerlos cacheados. 
 
 Lo que sí es exclusivo de Node.js es cómo cachear esta clase de datos. No cacheas el valor, sino la promesa que te devuelve. Ya después cuando coges la promesa cacheada la resuelves y ya.
 
-### 8. Haz caso de los warnings
+### 7. Haz caso de los warnings
 
 Explicar el tema de los warnings con el paquete mysql.
 
