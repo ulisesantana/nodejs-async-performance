@@ -11,6 +11,9 @@
     "code-surfer": "3.1.0",
     "mdx-deck": "3.0.13"
   },
+  "engines": {
+    "node": "^16"
+  },
   "name": "mdx-deck-template",
   "dependencies": {
     "styled-components": "^5.3.1"
