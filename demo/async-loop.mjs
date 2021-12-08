@@ -1,4 +1,4 @@
-import {Benchmark} from "./benchmark.mjs";
+import {Benchmark} from "./helpers/benchmark.mjs";
 import {setTimeout} from 'timers/promises'
 
 function doSomething() {

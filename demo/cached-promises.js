@@ -1,13 +1,13 @@
 import {Benchmark} from "./helpers/benchmark.mjs";
 
-const suite = new Benchmark('Simple function')
+const suite = new Benchmark('Caching promises')
 
-await suite.add('Sync', () => {
+await suite.add('by value', () => {
   const x = Math.random()
   return x ** x
 })
 
-await suite.add('Async', async () => {
+await suite.add('by promise', async () => {
   const x = Math.random()
   return x ** x
 })
