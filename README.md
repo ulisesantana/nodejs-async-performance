@@ -1,7 +1,5 @@
-# MDX Deck + Code Surfer template
-
-This project was generated with the `npm init code-surfer-deck` command for Lean Mind decks.
-
+# Cómo pasé un proceso en Node.js de 5 horas a 5 minutos
+  
 ![Example preview](docs/example.png)
 
 ## Development
