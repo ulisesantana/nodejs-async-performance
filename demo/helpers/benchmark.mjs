@@ -8,14 +8,14 @@ export class Benchmark {
   }
 
   async add(title, test) {
-    const limit = Date.now() + Benchmark.#maxTimeInMs
     let totalExecutions = 0
+    const limit = Date.now() + Benchmark.#maxTimeInMs
     while (Date.now() <= limit) {
       const result = test()
       if (result instanceof Promise) {
         await test()
       }
-      totalExecutions +=1
+      totalExecutions += 1
     }
     this.#results.push({
       title,
@@ -31,7 +31,12 @@ export class Benchmark {
   }
 
   get results() {
-    return [...this.#results].sort((a, b) => b.totalExecutions - a.totalExecutions)
-  }
+    const sortedResults = [...this.#results].sort((a, b) => b.totalExecutions - a.totalExecutions)
+    const [first] = sortedResults
+    return sortedResults.map(result => ({
+        ...result,
+        diff: `${(((result.totalExecutions / first.totalExecutions) - 1) * 100).toFixed(2)} %`
+      }))
+    }
 
 }
