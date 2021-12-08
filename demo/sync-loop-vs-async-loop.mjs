@@ -12,7 +12,7 @@ async function doSomethingAsync() {
   return x ** x
 }
 
-const suite = new Benchmark('Loops', 1000)
+const suite = new Benchmark('Loops', 100)
 await suite.add('Sync', () => {
   return [...Array(100).keys()].map(doSomething)
 })
