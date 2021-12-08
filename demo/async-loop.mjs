@@ -14,10 +14,6 @@ async function doSomethingAsync() {
 
 const suite = new Benchmark('Loops')
 
-await suite.add('Sync', () => {
-  return [...Array(100).keys()].map(doSomething)
-})
-
 await suite.add('Async', async () => {
   const values = []
   for (const _index of Array(100).keys()) {
