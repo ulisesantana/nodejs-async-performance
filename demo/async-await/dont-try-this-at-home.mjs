@@ -26,10 +26,10 @@ export async function transformToUpperCase(readableStream, writableStream) {
 export function transformToUpperCase2(readableStream, writableStream) {
   const data = [];
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     fs.unlink(path.resolve("demo/data-upper-case.txt"), (err) => {
       if (err) {
-        throw err
+        return reject(err)
       }
       readableStream
         .on("data", (chunk) => {

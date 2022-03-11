@@ -10,20 +10,20 @@ const LogoStyle = styled.div`
     justify-content: space-between;
     position: absolute;
     left: 24px;
-    width: 200px;
+    width:300px;
     z-index: 1;
 
     .isotype {
-        width: 80px;
+        width: 120px;
     }
 
     .anagram {
-        padding-top: 17px;
-        width: 110px;
+        padding-top: 25px;
+        width: 165px;
     }
 `
 
-export const Logo = () => (
+export const LeanMind = () => (
     <LogoStyle>
         <img className="isotype" src={isotype} alt="Lean Mind Isotype" />
         <img className="anagram" src={anagram} alt="Lean Mind Anagram" />

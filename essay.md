@@ -13,7 +13,9 @@ Por concluir esta contextualización:
 
 ## La calma antes de la tormenta
 
-A Abraham Lincoln se le atribuye la siguiente frase: *Dame 6 horas para cortar un árbol y pasaré 4 afilando el hacha*. Sabíamos que iba a haber un cambio legislativo que conllevarían cambios en los proyectos, así que desde 2 meses antes del deadline propusimos refactorizar los proyectos y uno en concreto solicitamos rehacerlo desde 0, ya que en ese entonces era realmente un prototipo que funcionaba, pero costaba mantener y con el cambio legislativo se iba a hacer más inmantenible. Vamos a llamar a este proyecto el *Proyecto Leñador*.
+A Abraham Lincoln se le atribuye la siguiente frase: *Dame 6 horas para cortar un árbol y pasaré 4 afilando el hacha*. Sabíamos que iba a haber un cambio legislativo que conllevarían cambios en los proyectos, así que desde 2 meses antes del deadline propusimos refactorizar los proyectos y uno en concreto solicitamos rehacerlo desde 0, ya que en ese entonces era realmente un prototipo que funcionaba, pero costaba mantener y con el cambio legislativo se iba a hacer más insostenible. Vamos a llamar a este proyecto el *Proyecto Leñador*.
+
+![](assets/lumberjack.jpeg)
 
 En Lean Mind por regla general trabajamos haciendo pair o mob programming, por lo que nadie nunca está solo y así facilitamos que el código sea más sostenible y que tanto la autoría del código como el conocimiento se comparta. Sin embargo, como teníamos 5 proyectos que actualizar decidimos dividirnos lo máximo posible para poder abarcar al menos 3 proyectos a la vez y poder tener los cambios lo antes posible. Eso sale a 2 personas por proyecto y una persona sola. Esa persona que se quedó sola fui yo y estuve a varias bandas asistiendo a los diferentes equipos a la par que trabajaba en el proyecto en el que me tocaba. 
 
@@ -29,7 +31,7 @@ El prototipo original basándose en un set de datos de unos cientos de miles de 
 
 ![](assets/gifs/coffin-dance.gif) 
 
-Por meter más leña al fuego [¿lo pillas? Leña, *Proyecto Leñador* 🤣], esto pasó a unos 10 días del deadline. No podíamos replantear el proyecto, había que optimizarlo en menos de una semana, además de que había más cosas en la parrilla. En esta situación, por un lado me motivaba a mí mismo pensando cosas del tipo *Llevo toda mi vida preparándome para este momento, los talleres sobre asincronía en Node.js con Matteo Collina y James Snell van a dar sus frutos* [Por cierto, un saludo desde aquí a Matteo Collina y James Snell]. Sin embargo, otra parte de mí era una mezcla de esto:
+Por meter más leña al fuego [¿lo pillas? Leña, *Proyecto Leñador* 🤣], esto pasó a unos 10 días del deadline, 10 días naturales. No podíamos replantear el proyecto, había que optimizarlo en menos de una semana, además de que había más cosas en la parrilla. En esta situación, por un lado me motivaba a mí mismo pensando cosas del tipo *Llevo toda mi vida preparándome para este momento, los talleres sobre asincronía en Node.js con Matteo Collina y James Snell van a dar sus frutos* [Por cierto, un saludo desde aquí a Matteo Collina y James Snell]. Sin embargo, otra parte de mí era una mezcla de esto:
 
 ![](assets/gifs/sheldon-bag.gif)
 ![](assets/gifs/pickle-rick.gif)
@@ -99,7 +101,7 @@ Aparte de haber mejorado la sostenibilidad del proyecto, habíamos mejorado la p
 
 ## Otras cosas que he visto en otros proyectos y que tampoco recomiendo que hagas
 
-* Poner ejemplo que es pan con pan y una pulga en medio.
+* Poner ejemplo que es pan con pan y una pulga en medio. (_Demo async-await/dont-try-this-at-home_)
 * Mezclar async/await con Promises
 
 

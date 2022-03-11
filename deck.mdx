@@ -1,8 +1,13 @@
-import { CodeSurfer } from "code-surfer";
-import { Footer } from "./components/index.js";
+import {CodeSurfer} from "code-surfer";
+import {Split, Appear} from 'mdx-deck'
+import {Footer, Layout, Row} from "./components";
 import nodeJsLogo from "./assets/node-js-logo.svg"
 import lumberjackImage from "./assets/lumberjack.jpeg"
-
+import ulises from "./assets/ulises.webp"
+import mocha from "./assets/mocha-puppy.jpg"
+import nullTheCat from "./assets/null.jpg"
+import mochaAndNull from "./assets/mocha-and-null.jpg"
+import coffinDance from "./assets/gifs/coffin-dance.gif"
 
 ## Cómo pasé un proceso en
 
@@ -15,17 +20,163 @@ import lumberjackImage from "./assets/lumberjack.jpeg"
 
 ---
 
-## El Proyecto Leñador
+<Split style={{textAlign: 'center', width: '80%'}}>
+
+  <img
+    src={ulises}
+    alt="Foto de Ulises Santana"
+    style={{borderRadius: '50%'}}
+  />
+
+  ## Ulises Santana
+
+  Full Stack Developer en Lean Mind
+
+</Split>
+
+<Footer/>
+
+---
+
+<Row>
+  <img
+    src={mocha}
+    alt="Mi perra Mocha"
+    style={{height: '400px', transform: 'rotate(-15deg)'}}
+  />
+  <img
+    src={nullTheCat}
+    alt="Mi gato Null"
+    style={{height: '400px', transform: 'rotate(15deg)'}}
+  />
+</Row>
 
 <img
-  src={lumberjackImage}
-  alt="Ulises vestido de leñador con hacha en mano"
-  style={{height: '400px'}}
+  src={mochaAndNull}
+  alt="Mocha y Null siendo felices"
+  style={{height: '500px'}}
 />
 
 <Footer/>
 
 ---
+
+<Layout>
+
+  # Contexto
+
+  <Appear>
+    <ol>
+      <li>
+        No todo el equipo controlaba la tecnología en la que se estaba
+        trabajando.
+      </li>
+      <li>
+        El deadline es fijo y crítico, ya que rompemos el cash flow de la
+        empresa en caso de retrasarnos.
+      </li>
+    </ol>
+  </Appear>
+
+</Layout>
+
+<Footer/>
+
+---
+
+<Layout>
+
+  # *Dame 6 horas para cortar un árbol y pasaré 4 afilando el hacha*
+
+</Layout>
+
+<Footer/>
+
+---
+
+## El Proyecto Leñador
+
+<img
+  src={lumberjackImage}
+  alt="Ulises vestido de leñador con hacha en mano"
+  style={{height: '600px'}}
+/>
+
+<Footer/>
+
+---
+
+<Layout>
+
+  ## Prototipo original:
+
+  ~7 minutos
+
+  <Appear>
+    <div>
+      <h2>Proyecto Leñador:</h2>
+      <p
+        style={{
+          color: 'red',
+          fontWeight: 'bold',
+          textDecoration: "underline"
+        }}
+      >
+        5 horas 7 minutos y 54 segundos
+      </p>
+    </div>
+  </Appear>
+
+</Layout>
+
+<Footer/>
+
+---
+
+<h1
+  style={{
+    fontSize: '10rem',
+    color: 'red'
+  }}
+>
+  + 4400%
+</h1>
+
+<Appear>
+  <img
+    src={coffinDance}
+    alt="Gif de los bailarines del ataúd (Coffin dance)"
+    width="800px"
+  />
+</Appear>
+
+<Footer/>
+
+---
+
+# Deadline: 10 días
+
+<Appear>
+  <h1 style={{textDecoration: 'underline'}}>NATURALES</h1>
+</Appear>
+
+
+<Footer/>
+
+---
+
+FOTO DE MATTEO Y JAMES
+
+<Footer/>
+
+---
+
+GIFS
+
+<Footer/>
+
+---
+
 
 <Footer/>
 
@@ -34,20 +185,20 @@ import lumberjackImage from "./assets/lumberjack.jpeg"
 <CodeSurfer>
 
 
-```js showNumbers
-console.log(1);
-console.log(2);
-console.log(3);
-```
+  ```js showNumbers
+  console.log(1);
+  console.log(2);
+  console.log(3);
+  ```
 
-```diff 1
-```
+  ```diff 1
+  ```
 
-```diff 2
-```
+  ```diff 2
+  ```
 
-```diff 3
-```
+  ```diff 3
+  ```
 
 </CodeSurfer>
 

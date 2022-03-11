@@ -10,7 +10,7 @@ function square() {
  * In a test suite we reduced the execution time by 40% just removing unnecessary async in functions
  */
 const amountOfExecutions = 1_000_000
-console.log(`Executing ${amountOfExecutions} times`)
+console.log(`Executing ${amountOfExecutions.toLocaleString('es-ES')} times`)
 
 await measure('sync function', () => {
   for (let i = 0; i < amountOfExecutions; i++) {

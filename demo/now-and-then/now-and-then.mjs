@@ -23,3 +23,4 @@ interval({
     log(`The file has ${fileLength.length} characters.`)
   }
 })
+

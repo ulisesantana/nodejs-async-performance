@@ -10,7 +10,7 @@ async function doSomethingAsync() {
 
 
 const amountOfExecutions = 50
-console.log(`Async loops for ${amountOfExecutions} executions`)
+console.log(`Async loops for ${amountOfExecutions.toLocaleString('es-ES')} executions`)
 
 await measure('using Promise.all', () => asyncIteration(amountOfExecutions, () => {
   return Promise.all([...Array(100).keys()].map(doSomethingAsync))

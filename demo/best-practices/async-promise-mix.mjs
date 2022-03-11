@@ -38,7 +38,7 @@ function doSomethingAsyncThenAwait() {
 }
 
 const amountOfExecutions = 1_000
-console.log(`Mixing Promises with Async  for ${amountOfExecutions} executions`)
+console.log(`Mixing Promises with Async  for ${amountOfExecutions.toLocaleString('es-ES')} executions`)
 await measure('mixing async/await and then', () => asyncIteration(amountOfExecutions, doSomethingAsyncThenAwait))
 await measure('using then', () => asyncIteration(amountOfExecutions, doSomethingAsyncThen))
 await measure('using async/await', () => asyncIteration(amountOfExecutions, doSomethingAsync))

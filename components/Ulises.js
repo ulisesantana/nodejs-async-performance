@@ -12,7 +12,7 @@ const UlisesStyle = styled.div`
     z-index: 1;
 
     .logo {
-        height: 100px;
+        height: 180px;
     }
 `
 
