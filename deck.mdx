@@ -1,13 +1,19 @@
 import {CodeSurfer} from "code-surfer";
 import {Split, Appear} from 'mdx-deck'
-import {Footer, Layout, Row} from "./components";
+import {Footer, Layout, ProfileImage, Row} from "./components";
+
 import nodeJsLogo from "./assets/node-js-logo.svg"
 import lumberjackImage from "./assets/lumberjack.jpeg"
 import ulises from "./assets/ulises.webp"
+import matteo from "./assets/matteo.jpg"
+import james from "./assets/james.jpg"
 import mocha from "./assets/mocha-puppy.jpg"
 import nullTheCat from "./assets/null.jpg"
 import mochaAndNull from "./assets/mocha-and-null.jpg"
+
 import coffinDance from "./assets/gifs/coffin-dance.gif"
+import sheldonBag from "./assets/gifs/sheldon-bag.gif"
+import pickleRick from "./assets/gifs/pickle-rick.gif"
 
 ## Cómo pasé un proceso en
 
@@ -22,10 +28,9 @@ import coffinDance from "./assets/gifs/coffin-dance.gif"
 
 <Split style={{textAlign: 'center', width: '80%'}}>
 
-  <img
+  <ProfileImage
     src={ulises}
     alt="Foto de Ulises Santana"
-    style={{borderRadius: '50%'}}
   />
 
   ## Ulises Santana
@@ -38,7 +43,7 @@ import coffinDance from "./assets/gifs/coffin-dance.gif"
 
 ---
 
-<Row>
+<Row alignCenter>
   <img
     src={mocha}
     alt="Mi perra Mocha"
@@ -142,13 +147,15 @@ import coffinDance from "./assets/gifs/coffin-dance.gif"
   + 4400%
 </h1>
 
-<Appear>
+<Footer/>
+
+---
   <img
     src={coffinDance}
     alt="Gif de los bailarines del ataúd (Coffin dance)"
-    width="800px"
+    width="1200px"
   />
-</Appear>
+
 
 <Footer/>
 
@@ -165,18 +172,42 @@ import coffinDance from "./assets/gifs/coffin-dance.gif"
 
 ---
 
-FOTO DE MATTEO Y JAMES
+<Row alignCenter>
+  <ProfileImage
+    src={matteo}
+    alt="Foto de Matteo Collina"
+    size="400px"
+  />
+
+  <ProfileImage
+    src={james}
+    alt="Foto de James Snell"
+    size="400px"
+  />
+</Row>
 
 <Footer/>
 
 ---
 
-GIFS
+<Row>
+  <img
+    src={sheldonBag}
+    alt="Gif de Sheldon respirando en una bolsa de papel"
+    width="800px"
+  />
+  <img
+    src={pickleRick}
+    alt="Gif de Pickle Rick agonizando bajo el sol"
+    width="600px"
+  />
+</Row>
 
 <Footer/>
 
 ---
 
+# 1. Evita async innecesarios
 
 <Footer/>
 
