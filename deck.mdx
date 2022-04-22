@@ -1,6 +1,6 @@
 import {CodeSurfer} from "code-surfer";
 import {Split, Appear} from 'mdx-deck'
-import {Footer, Layout, ProfileImage, Row} from "./components";
+import {Footer, Layout, ProfileImage, LeanMind, Row} from "./components";
 
 import nodeJsLogo from "./assets/node-js-logo.svg"
 import lumberjackImage from "./assets/lumberjack.jpeg"
@@ -26,16 +26,31 @@ import pickleRick from "./assets/gifs/pickle-rick.gif"
 
 ---
 
-<Split style={{textAlign: 'center', width: '80%'}}>
+<Split style={{
+  textAlign: 'center',
+  width: '80%'
+}}>
 
   <ProfileImage
     src={ulises}
     alt="Foto de Ulises Santana"
   />
 
+  <div style={{
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  }}>
+
   ## Ulises Santana
 
-  Full Stack Developer en Lean Mind
+  Full Stack Developer en
+
+  <LeanMind/>
+
+  </div>
+
 
 </Split>
 

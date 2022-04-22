@@ -1,8 +1,10 @@
-import React from 'react'
-import {LeanMind} from "./LeanMind.js";
-import {Ulises} from "./Ulises.js";
+import React from "react";
+import { LeanMindFixedBottom } from "./LeanMind.js";
+import { Ulises } from "./Ulises.js";
 
-export const Footer = React.memo(() => <div>
-  <LeanMind/>
-  <Ulises/>
-</div>)
+export const Footer = React.memo(() => (
+  <div>
+    <LeanMindFixedBottom />
+    <Ulises />
+  </div>
+));
