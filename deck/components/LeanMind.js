@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import isotype from "../assets/leanmind-isotipo.svg";
-import anagram from "../assets/leanmind-anagrama.svg";
+import isotype from "../assets/images/leanmind-isotipo.svg";
+import anagram from "../assets/images/leanmind-anagrama.svg";
 
 const LogoStyle = styled.div`
   align-items: center;

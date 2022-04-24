@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import isotype from '../assets/ulisesantana.webp'
+import isotype from '../assets/images/ulisesantana.webp'
 
 const UlisesStyle = styled.div`
     align-items: center;
