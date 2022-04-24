@@ -4,3 +4,5 @@ node_modules
 .vscode
 
 demo/*.txt
+*.DS_Store
+*.jpg:Zone.Identifier
