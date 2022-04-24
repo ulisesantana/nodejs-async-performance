@@ -38,7 +38,7 @@ export const LeanMind = ({size = '300px'}) => (
 export const LeanMindFixedBottom = React.memo(() => (
   <div
     style={{
-      bottom: "16px",
+      bottom: "24px",
       position: "absolute",
       left: "24px",
     }}

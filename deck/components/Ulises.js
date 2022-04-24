@@ -4,7 +4,7 @@ import isotype from '../assets/images/ulisesantana.webp'
 
 const UlisesStyle = styled.div`
     align-items: center;
-    bottom: 16px;
+    bottom: 24px;
     display: flex;
     justify-content: space-between;
     position: absolute;

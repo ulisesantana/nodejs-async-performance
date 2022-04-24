@@ -8,6 +8,7 @@ Por otro lado, estábamos trabajando en las distintas partes de un motor de fact
 
 Por concluir esta contextualización:
 
+- Se iba a rehacer un proyecto desde cero y habían modificaciones en varios más.
 - No todo el equipo controlaba la tecnología en la que se estaba trabajando.
 - El deadline es fijo y crítico, ya que rompemos el cash flow de la empresa en caso de retrasarnos.
 
@@ -59,7 +60,9 @@ Cada vez que haces un await dentro de un for
 (_Demo best-practices/promise-all_)
 (_Demo best-practices/promise-all-settled_)
 
-### 4. Si no sabes cuántas promesas vas a tener en un Promise.all usa p-map y limita la concurrencia
+### 4. Sé consciente de cuantas promesas estás gestionando
+
+Si no sabes cuántas promesas vas a tener en un Promise.all usa p-map y limita la concurrencia. 
 
 Recordar que la version 5 pasó a ser tipo modules y nosotros nos quedamos en la 4.
 

@@ -1,6 +1,6 @@
 import {CodeSurfer} from "code-surfer";
 import {Split, Appear} from 'mdx-deck'
-import {Footer, Layout, ProfileImage, LeanMind, Row} from "./components";
+import {Footer, Layout, ProfileImage, LeanMind, Row, GlobalStyle, FluidContainer} from "./components";
 import {isPortrait} from "./helpers"
 
 import nodeJsLogo from "./assets/images/node-js-logo.svg"
@@ -18,9 +18,17 @@ import pickleRick from "./assets/gifs/pickle-rick.gif"
 
 import uselessAsync from "./assets/screenshots/useless-async.png"
 
+export const theme = {
+  styles: GlobalStyle
+}
+
 ## Cómo pasé un proceso en
 
-<img src={nodeJsLogo} style={{height: '30vmin'}} alt="Node.js logo"/>
+<img 
+  src={nodeJsLogo} 
+  style={{height: '30vmin', float: 'right', position: 'relative'}} 
+  alt="Node.js logo"
+/>
 
 ## de 5 horas a 5 minutos
 
@@ -29,11 +37,9 @@ import uselessAsync from "./assets/screenshots/useless-async.png"
 
 ---
 
-<div style={{
+<FluidContainer style={{
   alignContent: 'center',
-  display: 'flex',
   justifyContent: isPortrait() ? 'center' : 'space-around' ,
-  flexWrap: 'wrap',
   textAlign: isPortrait() ? 'center' : 'right',
   width: '100%'
 }}>
@@ -44,7 +50,7 @@ import uselessAsync from "./assets/screenshots/useless-async.png"
   />
 
   <div style={{
-    alignContent: 'flex-end',
+    alignItems: isPortrait() ? 'center' : 'end',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center'
@@ -59,7 +65,7 @@ import uselessAsync from "./assets/screenshots/useless-async.png"
   </div>
 
 
-</div>
+</FluidContainer>
 
 <Footer/>
 
@@ -92,18 +98,9 @@ import uselessAsync from "./assets/screenshots/useless-async.png"
 
   # Contexto
 
-  <Appear>
-    <ol>
-      <li>
-        No todo el equipo controlaba la tecnología en la que se estaba
-        trabajando.
-      </li>
-      <li>
-        El deadline es fijo y crítico, ya que rompemos el cash flow de la
-        empresa en caso de retrasarnos.
-      </li>
-    </ol>
-  </Appear>
+  1. Se iba a rehacer un proyecto desde cero y habían modificaciones en varios más.
+  1. No todo el equipo controlaba la tecnología en la que se estaba trabajando.
+  1. El deadline es fijo y crítico, ya que rompemos el cash flow de la empresa en caso de retrasarnos.
 
 </Layout>
 
@@ -196,7 +193,7 @@ import uselessAsync from "./assets/screenshots/useless-async.png"
 
 ---
 
-<Row alignCenter>
+<FluidContainer>
   <ProfileImage
     src={matteo}
     alt="Foto de Matteo Collina"
@@ -208,13 +205,13 @@ import uselessAsync from "./assets/screenshots/useless-async.png"
     alt="Foto de James Snell"
     size="60vmin"
   />
-</Row>
+</FluidContainer>
 
 <Footer/>
 
 ---
 
-<Row>
+<FluidContainer>
   <img
     src={sheldonBag}
     alt="Gif de Sheldon respirando en una bolsa de papel"
@@ -225,7 +222,7 @@ import uselessAsync from "./assets/screenshots/useless-async.png"
     alt="Gif de Pickle Rick agonizando bajo el sol"
     width="600px"
   />
-</Row>
+</FluidContainer>
 
 <Footer/>
 
@@ -307,13 +304,12 @@ import uselessAsync from "./assets/screenshots/useless-async.png"
 ---
 
 # 3. Usa Promise.all siempre que puedas
-## Promise.allSettled también existe
 
 <Footer/>
 
 ---
 
-# 4. Si no sabes cuántas promesas vas a tener en un Promise.all usa p-map y limita la concurrencia
+# 4. Sé consciente de cuantas promesas estás gestionando
 
 <Footer/>
 
