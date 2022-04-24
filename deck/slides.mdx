@@ -1,6 +1,7 @@
 import {CodeSurfer} from "code-surfer";
 import {Split, Appear} from 'mdx-deck'
 import {Footer, Layout, ProfileImage, LeanMind, Row} from "./components";
+import {isPortrait} from "./helpers"
 
 import nodeJsLogo from "./assets/node-js-logo.svg"
 import lumberjackImage from "./assets/lumberjack.jpeg"
@@ -15,9 +16,11 @@ import coffinDance from "./assets/gifs/coffin-dance.gif"
 import sheldonBag from "./assets/gifs/sheldon-bag.gif"
 import pickleRick from "./assets/gifs/pickle-rick.gif"
 
+import uselessAsync from "./assets/screenshots/useless-async.png"
+
 ## Cómo pasé un proceso en
 
-<img src={nodeJsLogo} style={{height: '300px'}} alt="Node.js logo"/>
+<img src={nodeJsLogo} style={{height: '30vmin'}} alt="Node.js logo"/>
 
 ## de 5 horas a 5 minutos
 
@@ -26,18 +29,22 @@ import pickleRick from "./assets/gifs/pickle-rick.gif"
 
 ---
 
-<Split style={{
-  textAlign: 'center',
-  width: '80%'
+<div style={{
+  alignContent: 'center',
+  display: 'flex',
+  justifyContent: isPortrait() ? 'center' : 'space-around' ,
+  flexWrap: 'wrap',
+  textAlign: isPortrait() ? 'center' : 'right',
+  width: '100%'
 }}>
-
   <ProfileImage
     src={ulises}
+    size="75vmin"
     alt="Foto de Ulises Santana"
   />
 
   <div style={{
-    alignItems: 'center',
+    alignContent: 'flex-end',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center'
@@ -47,12 +54,12 @@ import pickleRick from "./assets/gifs/pickle-rick.gif"
 
   Full Stack Developer en
 
-  <LeanMind/>
+  <LeanMind size="50vmin"/>
 
   </div>
 
 
-</Split>
+</div>
 
 <Footer/>
 
@@ -62,19 +69,19 @@ import pickleRick from "./assets/gifs/pickle-rick.gif"
   <img
     src={mocha}
     alt="Mi perra Mocha"
-    style={{height: '400px', transform: 'rotate(-15deg)'}}
+    style={{height: '40vmin', transform: 'rotate(-15deg)'}}
   />
   <img
     src={nullTheCat}
     alt="Mi gato Null"
-    style={{height: '400px', transform: 'rotate(15deg)'}}
+    style={{height: '40vmin', transform: 'rotate(15deg)'}}
   />
 </Row>
 
 <img
   src={mochaAndNull}
   alt="Mocha y Null siendo felices"
-  style={{height: '500px'}}
+  style={{height: '40vmin'}}
 />
 
 <Footer/>
@@ -119,7 +126,7 @@ import pickleRick from "./assets/gifs/pickle-rick.gif"
 <img
   src={lumberjackImage}
   alt="Ulises vestido de leñador con hacha en mano"
-  style={{height: '600px'}}
+  style={{height: '50vmin'}}
 />
 
 <Footer/>
@@ -155,7 +162,7 @@ import pickleRick from "./assets/gifs/pickle-rick.gif"
 
 <h1
   style={{
-    fontSize: '10rem',
+    fontSize: '20vw',
     color: 'red'
   }}
 >
@@ -165,11 +172,13 @@ import pickleRick from "./assets/gifs/pickle-rick.gif"
 <Footer/>
 
 ---
-  <img
-    src={coffinDance}
-    alt="Gif de los bailarines del ataúd (Coffin dance)"
-    width="1200px"
-  />
+<img
+  src={coffinDance}
+  alt="Gif de los bailarines del ataúd (Coffin dance)"
+  style={{
+    width: '80vw'
+  }}
+/>
 
 
 <Footer/>
@@ -191,13 +200,13 @@ import pickleRick from "./assets/gifs/pickle-rick.gif"
   <ProfileImage
     src={matteo}
     alt="Foto de Matteo Collina"
-    size="400px"
+    size="60vmin"
   />
 
   <ProfileImage
     src={james}
     alt="Foto de James Snell"
-    size="400px"
+    size="60vmin"
   />
 </Row>
 
@@ -223,6 +232,120 @@ import pickleRick from "./assets/gifs/pickle-rick.gif"
 ---
 
 # 1. Evita async innecesarios
+
+<Footer/>
+
+---
+
+<CodeSurfer>
+
+  ```javascript
+  export function syncIteration(amountOfExecutions, task) {
+    for (let i = 0; i < amountOfExecutions; i++) {
+      task()
+    }
+  }
+
+  export async function asyncIteration(amountOfExecutions, task) {
+    for (let i = 0; i < amountOfExecutions; i++) {
+      await task()
+    }
+  }
+  ```
+
+  ```diff 1:5
+  ```
+
+  ```diff 1[8:56]
+  ```
+
+  ```diff 1[31:48]
+  ```
+
+  ```diff 1[50:54]
+  ```
+
+  ```diff 2,4
+  ```
+
+  ```diff 3
+  ```
+
+  ```diff 7:11
+  ```
+
+  ```diff 7[8:13],9
+  ```
+
+  ```javascript
+  function randomNumber() {
+    const x = Math.random()
+    return x ** x
+  }
+  ```
+
+</CodeSurfer>
+
+<Footer/>
+
+---
+
+<img
+  src={uselessAsync}
+  alt="Resultado demo useless-async"
+  style={{width: '95%'}}
+/>
+
+<Footer/>
+
+---
+
+# 2. Evita los await dentro de los bucles
+
+<Footer/>
+
+---
+
+# 3. Usa Promise.all siempre que puedas
+## Promise.allSettled también existe
+
+<Footer/>
+
+---
+
+# 4. Si no sabes cuántas promesas vas a tener en un Promise.all usa p-map y limita la concurrencia
+
+<Footer/>
+
+---
+
+# 5. Los async iterators pueden ser maravillosos
+
+<Footer/>
+
+---
+
+# 6. Cachear queries
+
+<Footer/>
+
+---
+
+# 7. Haz caso de los warnings
+
+<Footer/>
+
+---
+
+<CodeSurfer>
+
+  ```shell
+  (node) warning: possible EventEmitter memory leak detected.
+  11 listeners added.
+  Use emitter.setMaxListeners() to increase limit.
+  ```
+
+</CodeSurfer>
 
 <Footer/>
 

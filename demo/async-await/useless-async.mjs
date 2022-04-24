@@ -1,7 +1,6 @@
-import {measure} from "../_helpers/index.mjs";
-import {asyncIteration} from "../_helpers/async-iteration.mjs";
+import {measure, asyncIteration, syncIteration} from "../_helpers/index.mjs";
 
-function square() {
+export function randomNumber() {
     const x = Math.random()
     return x ** x
 }
@@ -11,15 +10,5 @@ function square() {
  */
 const amountOfExecutions = 1_000_000
 console.log(`Executing ${amountOfExecutions.toLocaleString('es-ES')} times`)
-
-await measure('sync function', () => {
-  for (let i = 0; i < amountOfExecutions; i++) {
-    square()
-  }
-  const x = Math.random()
-  return x ** x
-})
-
-await measure('async function', () => asyncIteration(amountOfExecutions, async () => {
-  return square()
-}))
+await measure('sync function', () => syncIteration(amountOfExecutions, randomNumber))
+await measure('async function', () => asyncIteration(amountOfExecutions, randomNumber))

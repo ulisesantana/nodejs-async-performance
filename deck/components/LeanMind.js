@@ -7,21 +7,21 @@ const LogoStyle = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  width: 300px;
+  width: ${props => props.size};
   z-index: 1;
 
   .isotype {
-    width: 120px;
+    width: calc(${props => props.size} * 0.4);
   }
 
   .anagram {
-    padding-top: 25px;
-    width: 165px;
+    padding-top: calc(${props => props.size} * 0.083333);
+    width: calc(${props => props.size} * 0.55);
   }
 `;
 
-export const LeanMind = () => (
-  <LogoStyle>
+export const LeanMind = ({size = '300px'}) => (
+  <LogoStyle size={size}>
     <img
       className="isotype"
       src={isotype}
@@ -35,7 +35,7 @@ export const LeanMind = () => (
   </LogoStyle>
 );
 
-export const LeanMindFixedBottom = () => (
+export const LeanMindFixedBottom = React.memo(() => (
   <div
     style={{
       bottom: "16px",
@@ -43,6 +43,6 @@ export const LeanMindFixedBottom = () => (
       left: "24px",
     }}
   >
-    <LeanMind />
+    <LeanMind size="20vh" />
   </div>
-);
+));

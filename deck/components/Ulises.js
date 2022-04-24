@@ -12,12 +12,12 @@ const UlisesStyle = styled.div`
     z-index: 1;
 
     .logo {
-        height: 180px;
+        height: ${props => props.size};
     }
 `
 
 export const Ulises = React.memo(() => (
-    <UlisesStyle>
+    <UlisesStyle size="10vh">
         <img className="logo" src={isotype} alt="ulisesantana.dev" />
     </UlisesStyle>
 ))
