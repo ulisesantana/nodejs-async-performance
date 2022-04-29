@@ -1,19 +1,20 @@
 const commonHeadingsStyle = {
-  display: 'block',
   color: '#44843c',
   margin: '0',
-  padding: '24px',
-  width: '75%',
-  textAlign: 'right'
+  padding: '24px 0',
+  textAlign: 'center'
 }
 
 export const GlobalStyle = {
-    body: {
+    Slide: {
+      background: 'white',
+      color: '#333',
       height: 'calc(100% - 10vh)',
-      textAlign: 'right'
+      padding: '24px',
+      width: 'calc(100% - 20vw)',
     },
     p: {
-      textAlign: 'right'
+      textAlign: 'center'
     },
     h1: {
       ...commonHeadingsStyle

@@ -18,6 +18,10 @@ const UlisesStyle = styled.div`
 
 export const Ulises = React.memo(() => (
     <UlisesStyle size="10vh">
-        <img className="logo" src={isotype} alt="ulisesantana.dev" />
+        <img 
+            className="logo" 
+            src={isotype} 
+            alt="ulisesantana.dev" 
+        />
     </UlisesStyle>
 ))
