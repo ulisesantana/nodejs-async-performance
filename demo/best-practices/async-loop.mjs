@@ -1,16 +1,14 @@
-import {measure} from "../_helpers/index.mjs";
+import {measure, formatNumber} from "../_helpers/index.mjs";
 import {setTimeout} from 'timers/promises'
 import {asyncIteration} from "../_helpers/async-iteration.mjs";
 
 async function doSomethingAsync() {
   await setTimeout(1)
-  const x = Math.random()
-  return x ** x
+  return Math.random()
 }
 
-
-const amountOfExecutions = 50
-console.log(`Async loops for ${amountOfExecutions.toLocaleString('es-ES')} executions`)
+const amountOfExecutions = 1000
+console.log(`Async loops for ${formatNumber(amountOfExecutions)} executions`)
 
 await measure('using Promise.all', () => asyncIteration(amountOfExecutions, () => {
   return Promise.all([...Array(100).keys()].map(doSomethingAsync))

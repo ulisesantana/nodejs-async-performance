@@ -1,12 +1,12 @@
 import {CodeSurfer} from "code-surfer";
 import { github } from "@code-surfer/themes"
-import {Split, Steps, Footer} from 'mdx-deck'
+import {Split, Steps, Footer, Notes} from 'mdx-deck'
 import {Layout, ProfileImage, LeanMind, Row, GlobalStyle, FluidContainer, Footer as SlideFooter} from "./components";
 import {isPortrait} from "./helpers"
 
 import nodeJsLogo from "./assets/images/node-js-logo.svg"
 import lumberjackImage from "./assets/images/lumberjack.jpeg"
-import ulises from "./assets/images/ulises.webp"
+import ulises from "./assets/images/ulises.jpeg"
 import matteo from "./assets/images/matteo.jpg"
 import james from "./assets/images/james.jpg"
 import mocha from "./assets/images/mocha-puppy.jpg"
@@ -36,7 +36,6 @@ export const theme = {
 />
 
 ## de 5 horas a 5 minutos
-
 ---
 
 <FluidContainer style={{
@@ -69,7 +68,6 @@ export const theme = {
 
 </FluidContainer>
 
-
 ---
 
 <Row alignCenter>
@@ -91,7 +89,6 @@ export const theme = {
   style={{height: '40vmin'}}
 />
 
-
 ---
 
 <Layout>
@@ -104,7 +101,6 @@ export const theme = {
 
 </Layout>
 
-
 ---
 
 <Layout>
@@ -112,7 +108,6 @@ export const theme = {
   # *Dame 6 horas para cortar un árbol y pasaré 4 afilando el hacha*
 
 </Layout>
-
 
 ---
 
@@ -123,7 +118,6 @@ export const theme = {
   alt="Ulises vestido de leñador con hacha en mano"
   style={{height: '50vmin'}}
 />
-
 
 ---
 
@@ -150,7 +144,6 @@ export const theme = {
 
 </Layout>
 
-
 ---
 
 <h1
@@ -162,7 +155,6 @@ export const theme = {
   + 4400%
 </h1>
 
-
 ---
 <img
   src={coffinDance}
@@ -173,7 +165,6 @@ export const theme = {
 />
 
 
-
 ---
 
 # Deadline: 10 días
@@ -181,7 +172,6 @@ export const theme = {
 <Steps>
   <h1 style={{textDecoration: 'underline'}}>NATURALES</h1>
 </Steps>
-
 
 
 ---
@@ -199,7 +189,6 @@ export const theme = {
     size="60vmin"
   />
 </FluidContainer>
-
 
 ---
 
@@ -220,11 +209,9 @@ export const theme = {
   />
 </FluidContainer>
 
-
 ---
 
 # 1. Evita async innecesarios
-
 
 ---
 
@@ -270,52 +257,79 @@ export const theme = {
 
   ```javascript
   function randomNumber() {
-    const x = Math.random()
-    return x ** x
+    return Math.random()
   }
   ```
 
 </CodeSurfer>
 
+<Notes>
+
+- Ten en cuenta que cada función asíncrona de por sí devuelve una promesa. 
+- Si devuelves una promesa JavaScript tiene que gestionarlo. 
+- En una suite de test (bastante grande) reducimos un 40% el tiempo que tardaba en ejecutarse sólo quitando los async innecesarios
+
+</Notes>
 
 ---
 
 <img
   src={uselessAsync}
   alt="Resultado demo useless-async"
-  style={{width: '95%'}}
 />
-
 
 ---
 
 # 2. Evita los await dentro de los bucles
+
+---
+
+<CodeSurfer theme={github}>
+
+  ```js
+  export function syncIteration(amountOfExecutions, task) {
+    for (let i = 0; i < amountOfExecutions; i++) {
+      task()
+    }
+  }
+
+  export async function asyncIteration(amountOfExecutions, task) {
+    for (let i = 0; i < amountOfExecutions; i++) {
+      await task()
+    }
+  }
+  ```
+
+  ```javascript
+  function randomNumber() {
+    return Math.random()
+  }
+  ```
+
+</CodeSurfer>
+
+---
 
 
 ---
 
 # 3. Usa Promise.all siempre que puedas
 
-
 ---
 
 # 4. Sé consciente de cuantas promesas estás gestionando
-
 
 ---
 
 # 5. Los async iterators pueden ser maravillosos
 
-
 ---
 
 # 6. Cachear queries
 
-
 ---
 
 # 7. Haz caso de los warnings
-
 
 ---
 
@@ -328,7 +342,6 @@ export const theme = {
   ```
 
 </CodeSurfer>
-
 
 ---
 
@@ -351,7 +364,6 @@ export const theme = {
   ```
 
 </CodeSurfer>
-
 
 ---
 
