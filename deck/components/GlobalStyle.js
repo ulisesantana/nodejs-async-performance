@@ -1,5 +1,5 @@
 const commonHeadingsStyle = {
-  color: '#44843c',
+  color: '#0e717f',
   margin: '0',
   padding: '24px 0',
   textAlign: 'center'
