@@ -1,7 +1,14 @@
-import {CodeSurfer} from "code-surfer";
-import { github } from "@code-surfer/themes"
 import {Split, Steps, Footer, Notes} from 'mdx-deck'
-import {Layout, ProfileImage, LeanMind, Row, GlobalStyle, FluidContainer, Footer as SlideFooter} from "./components";
+import {
+  Code,
+  Layout, 
+  ProfileImage, 
+  LeanMind, 
+  Row, 
+  GlobalStyle, 
+  FluidContainer, 
+  Footer as SlideFooter
+} from "./components";
 import {isPortrait} from "./helpers"
 
 import nodeJsLogo from "./assets/images/node-js-logo.svg"
@@ -215,7 +222,7 @@ export const theme = {
 
 ---
 
-<CodeSurfer theme={github}>
+<Code>
 
   ```js
   export function syncIteration(amountOfExecutions, task) {
@@ -261,7 +268,7 @@ export const theme = {
   }
   ```
 
-</CodeSurfer>
+</Code>
 
 <Notes>
 
@@ -284,7 +291,7 @@ export const theme = {
 
 ---
 
-<CodeSurfer theme={github}>
+<Code>
 
   ```js
   export function syncIteration(amountOfExecutions, task) {
@@ -306,7 +313,7 @@ export const theme = {
   }
   ```
 
-</CodeSurfer>
+</Code>
 
 ---
 
@@ -333,7 +340,7 @@ export const theme = {
 
 ---
 
-<CodeSurfer theme={github}>
+<Code>
 
   ```shell
   (node) warning: possible EventEmitter memory leak detected.
@@ -341,11 +348,11 @@ export const theme = {
   Use emitter.setMaxListeners() to increase limit.
   ```
 
-</CodeSurfer>
+</Code>
 
 ---
 
-<CodeSurfer>
+<Code>
 
 
   ```js showNumbers
@@ -363,7 +370,7 @@ export const theme = {
   ```diff 3
   ```
 
-</CodeSurfer>
+</Code>
 
 ---
 
