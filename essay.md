@@ -51,9 +51,40 @@ Los async cuando los ponemos en una función, estamos automáticamente haciendo 
 
 ### 2. Evita los await dentro de los bucles.
 
-Cada vez que haces un await dentro de un for 
+Imagina que tienes una tarea que hacer que sea en base a una lista de IDs tienes que recuperar información de una API. Por limitaciones técnicas no puedes pasarle a la API la lista de IDs, sino que tienes que hacer una llamada por cada ID. ¿Cuál es la primera idea que se nos viene a la cabeza? Probablemente un bucle, apesta a bucle. La implementación podría ser algo así:
 
-> Debería explicar, al menos por encima, el Event Loop. Entender cómo funciona la asincronía por dentro ayuda mucho a entender lo que pasa cuando gestionas promesas 
+```javascript
+async function fetchUserListInfo(ids) {
+  const values = []
+  for (id of ids) {
+    values.push(await fetchUserInfo(id))
+  }
+  return values
+}
+```
+
+Parece sencillo y además si lo probamos veremos que funciona. Consigue la información de todos los usuarios sin problemas. ¿Sin problemas? Ese await dentro del `for` fuerza a que se termine de completar cada promesa antes de procesar la siguiente. Esto significa que si de media la API tarda en responder 50ms y tenemos 100 IDS que procesar, tardaremos unos 5 segundos en realizar la tarea. No es que sea un drama, pero si hacemos este ligero cambio la cosa cambia bastante:
+
+```javascript
+function fetchUserListInfo(ids) {
+  const values = []
+  for (id of ids) {
+    values.push(fetchUserInfo(id))
+  }
+  return Promise.all(values)
+}
+```
+
+Aquí vemos hay tres sutiles diferencias:
+1. La función ya no es asíncrona, aunque sí que devuelve una promesa.
+1. Dentro del for ya no hacemos un await
+1. Devolvemos un Promise.all en vez de los valores como hacíamos antes.
+
+La gran diferencia de esta solución es que dentro del bucle no resolvemos las promesas, sino que simplemente las añadimos a nuestro array en estado *Pending*. Cualquier función que devuelva una promesa la devuelve en este estado que hasta que no uses `await` o `.then` no estará *fulfilled* o *rejected*. Puedes verlo como el experimento del gato de Schrodinger, hasta que no abres la caja no sabes si el gato está vivo o muerto. A las promesas les pasa algo parecido, hasta que no las resuelves están en estado *pending* y una vez resueltas pueden estar *fulfilled*, que es cuando se ha resuelto satisfactoriamente, o *rejected* que es cuando ha habido algún error.
+
+Volviendo a la solución, vemos que las promesas no se resuelven, sino que se almacenan directamente en estado *Pending* y la función al devolverlas, las resuelve todas *a la vez*. Esto hace que ahora la tarea se haga mucho más rápido, tardando lo que tarde en responderse la llamada a la API más lenta. 
+
+Tengo por aquí otra demo en la que usamos el mismo código, lo único que cambia es la tarea en sí, que lo único que hace es esperar un milisegundo y devolvernos los 4 primeros caracteres del ID, simplemente por hacer algo. Lo que vamos a ver es cuanto tarda cada una de las soluciones ejecutando esta tarea para una lista de 100 IDS y lo va a hacer 1000 veces para que podamos ver si realmente hay una diferencia de performance o no.
 
 ### 3. Usa Promise.all siempre que puedas, el Promise.allSettled también existe
 
