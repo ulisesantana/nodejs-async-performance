@@ -36,12 +36,13 @@ function CacheByPromise() {
 const amountOfExecutions = 100_000_000
 console.log(`Caching promises for ${amountOfExecutions.toLocaleString('es-ES')} executions`)
 
-await measure(`by value ${amountOfExecutions}`, () => {
-  const cache = new CacheByValue()
-  return asyncIteration(amountOfExecutions, cache.getNumber)
-})
 
 await measure(`by promise ${amountOfExecutions}`, () => {
   const cache = new CacheByPromise()
+  return asyncIteration(amountOfExecutions, cache.getNumber)
+})
+
+await measure(`by value ${amountOfExecutions}`, () => {
+  const cache = new CacheByValue()
   return asyncIteration(amountOfExecutions, cache.getNumber)
 })

@@ -84,41 +84,121 @@ La gran diferencia de esta solución es que dentro del bucle no resolvemos las p
 
 Volviendo a la solución, vemos que las promesas no se resuelven, sino que se almacenan directamente en estado *Pending* y la función al devolverlas, las resuelve todas *a la vez*. Esto hace que ahora la tarea se haga mucho más rápido, tardando lo que tarde en responderse la llamada a la API más lenta. 
 
-Tengo por aquí otra demo en la que usamos el mismo código, lo único que cambia es la tarea en sí, que lo único que hace es esperar un milisegundo y devolvernos los 4 primeros caracteres del ID, simplemente por hacer algo. Lo que vamos a ver es cuanto tarda cada una de las soluciones ejecutando esta tarea para una lista de 100 IDS y lo va a hacer 1000 veces para que podamos ver si realmente hay una diferencia de performance o no.
+Tengo por aquí otra demo en la que usamos el mismo código, lo único que cambia es la tarea en sí, que lo único que hace es esperar un milisegundo y justo después devolvernos los 4 primeros caracteres del ID, simplemente por hacer algo. Lo que vamos a ver es cuanto tarda cada una de las soluciones ejecutando esta tarea para una lista de 100 IDS y lo va a hacer 1000 veces para que podamos ver si realmente hay una diferencia de performance o no.
 
-### 3. Usa Promise.all siempre que puedas, el Promise.allSettled también existe
+### 3. Usa Promise.all siempre que puedas
 
-(_Demo best-practices/promise-all_)
-(_Demo best-practices/promise-all-settled_)
+En nuestro día a día desarrollando soluciones de software nos encontramos que en más de una ocasión necesitamos varios recursos de diferentes sitios, ya sean tablas, bases de datos o APIs. Todo esto además tiene una naturaleza asícrona y necesitamos gestionarla.
+
+```js
+async function readAllUserInfo(userId) {
+  const user = await readUser(userId)
+  const contracts = await readContractsForUser(userId)
+  const invoices = await readInvoicesForUser(userId)
+  return {
+    ...user,
+    contracts,
+    invoices
+  }
+}
+```
+
+Aquí vemos un problema parecido al de antes, pero sin bucles. Aunque es menos dramático, es otro de los sitios de donde podemos rascar performance si utilizamos `Promise.all`, ya que como vemos ninguna de las peticiones depende de la otra, por lo que podríamos pedir toda la información a la vez y así reducir el tiempo que necesita la función para realizar la tarea.
+
+```js
+async function readAllUserInfo(userId) {
+  const [ user, contracts, invoices ] = await Promise.all([
+    readUser(userId),
+    readContractsForUser(userId),
+    readInvoicesForUser(userId)
+  ])
+  return {
+    ...user,
+    contracts,
+    invoices
+  }
+}
+```
 
 ### 4. Sé consciente de cuantas promesas estás gestionando
 
-Si no sabes cuántas promesas vas a tener en un Promise.all usa p-map y limita la concurrencia. 
+```js
+function fetchUserListInfo(ids) {
+  return Promise.all(ids.map(fetchUserInfo))
+}
+```
 
-Recordar que la version 5 pasó a ser tipo modules y nosotros nos quedamos en la 4.
+Esta sería otra forma de hacer el `fetchUserListInfo` que hemos visto un par de diapositivas atrás. Tanto esta como la anterior solución tienen un problema, no sabes cuántas promesas vas a tener en el `Promise.all`. En casos en los que no sabes el número de promesa que vas a gestionar o este número es muy alto es recomendable usar la librería `p-map` y limitar la concurrencia. La razón para hacer esto es que si tienes demasiadas promesas puedes acabar haciéndote un DDoS a ti mismo sin darte cuenta. En el *Proyecto Leñador* más que un DDoS lo que nos preocupaba era ahogar la base de datos. En estos proyectos la práctica habitual era limitar la concurrencia al número de conexiones que teníamos configurado para la base de datos, evitando así ahogar la base de datos. 
 
-### 5. Los async iterators pueden ser maravillosos
-Hasta ahora el único uso que les he dado es para leer en lotes de la base de datos. Sin embargo, en este caso de uso es maravilloso.
+```js
+import pMap from 'p-map';
 
-### 6. Cachear queries
+function fetchUserListInfo(ids) {
+  return pMap(
+    ids, 
+    fetchUserInfo, 
+    {concurrency: 10}
+  )
+}
+```
+
+Sólo tener en cuenta que `p-map` pasó a ser de tipo modules y a menos que tu proyecto esté hecho de esta manera no te va a funcionar. Para poder usarlo con CommonJS necesitas tirar de la versión 4. La realidad es que ambas versiones sólo difieren en si funcionan con ESModules o con CommonJS.
+
+### 5. Cachear queries
 
 Esto no es exclusivo de Node.js, pero era algo que no estábamos haciendo y que podía ayudar, ya que había ciertos datos que no cambiaban durante la ejecución y que no venía mal tenerlos cacheados. 
 
-Lo que sí es exclusivo de Node.js es cómo cachear esta clase de datos. No cacheas el valor, sino la promesa que te devuelve. Ya después cuando coges la promesa cacheada la resuelves y ya.
+Lo que sí es exclusivo de Node.js es cómo cachear esta clase de datos. No cacheas el valor, sino la promesa que te devuelve. Ya después cuando coges la promesa cacheada la resuelves y sigues trabajando con normalidad.
+
+Cacheando por valor: 
+```js
+function CacheByValue() {
+  let value = undefined
+
+  return {
+    async getNumber() {
+      if (value === undefined) {
+        value = await doSomethingAsync()
+      }
+      return value
+    }
+  }
+}
+``` 
+
+Cacheando por promesa: 
+```js
+function CacheByPromise() {
+  let value = undefined
+
+  return {
+    getNumber() {
+      if (value === undefined) {
+        value = doSomethingAsync()
+      }
+      return value
+    }
+  }
+}
+``` 
+
+En esta otra demo hecho a correr estos dos trozos de código cien millones de veces para ver si realmente hay diferencia. La hay aunque es mínima. 
 
 (_Demo best-practices/cached-promises_)
 
-### 7. Haz caso de los warnings
+### 6. Haz caso de los warnings
 
 En la consola al ejecutar el proceso me salía esto:
     
 ```shell
-(node) warning: possible EventEmitter memory leak detected. 11 listeners added. Use emitter.setMaxListeners() to increase limit.
+(node) warning: possible EventEmitter memory leak detected. 
+11 listeners added. 
+Use emitter.setMaxListeners() to increase limit.
 ```
 
 Yo pensaba *Meh, es un warning*. En una primera instancia simplemente hice lo que me decía y aumenté los listeners. Sin embargo, hasta que no me dediqué a limpiar los listeners a medida que los usaba no noté la mejora de performance. No era un posible memory leak, era un memory leak en toda regla.
 
-El problema era que había event handlers que se estaban creando continuamente con cada conexión que se solicitaba al pool de conexiones a la base de datos, pero que no se estaban eliminando, pudiendo ser el causante del memory leak. Tras implementar un fix en el que cada vez que se devuelve una conexión al pool se limpian los event handlers vimos una mejoría en la performance, bajando 4 veces el tiempo de ejecución.  
+El problema era que había event handlers que se estaban creando continuamente con cada conexión que se solicitaba al pool de conexiones de la base de datos, pero que no se estaban eliminando, siendo el causante del memory leak. Tras implementar el fix en el que cada vez que se devuelve una conexión al pool se limpian los event handlers asociados a la conexión vimos una mejoría en la performance, tardando 4 veces menos de lo que tardaba antes.  
 
 ## Resultado  
 
@@ -132,12 +212,6 @@ Y ya por estar completamente seguros de que había una mejora, ejecutamos una pr
 - *Proyecto Leñador:* 31:56 minutos
 
 Aparte de haber mejorado la sostenibilidad del proyecto, habíamos mejorado la performance más de un 20%. Y todo esto llegando al deadline.
-
-## Otras cosas que he visto en otros proyectos y que tampoco recomiendo que hagas
-
-* Poner ejemplo que es pan con pan y una pulga en medio. (_Demo async-await/dont-try-this-at-home_)
-* Mezclar async/await con Promises
-
 
 ## Cosas que aprendí
 
