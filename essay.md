@@ -1,8 +1,8 @@
 # Cómo pasé un proceso en Node.js de 5 horas a 5 minutos
 
-Hola! Soy Ulises Santana y trabajo como Full Stack Developer en Lean Mind donde ayudamos a otras empresas a hacer que sus proyectos de software sean más sostenibles. Soy de Gran Canaria, pero actualmente vivo en El Hierro desde donde trabajo de forma remota. Tengo una perrita llamada Mocha (en honor al nombre en clave de JavaScript cuando Brendan Eich empezó a trabajar en él) y un gatete llamado Null. 
+Hola! Hoy vengo aquí a hablar de cómo pasé un proceso en Node.js de 5 horas a 5 minutos. Sin embargo, antes me gustaría presentarme. Soy Ulises Santana y trabajo como Full Stack Developer en Lean Mind donde ayudamos a otras empresas a hacer que sus proyectos de software sean más sostenibles. Soy de Gran Canaria, pero actualmente vivo en El Hierro desde donde trabajo en remoto. Tengo una perrita llamada Mocha (en honor al nombre en clave de JavaScript cuando Brendan Eich empezó a trabajar en él) y un gatete llamado Null. 
 
-Hoy vengo aquí a hablar de cómo pasé un proceso en Node.js de 5 horas a 5 minutos. Para ello vamos a empezar por lo básico, el contexto. Estaba trabajando para un cliente en un equipo de 5 personas, en el que las otras 4 se habían incorporado en los últimos 3 meses, mientras que yo llevaba casi un año con el cliente. En este equipo mi rol era el de Senior Node.js Developer y era el único que tenía experiencia previa trabajando con Node.js. Aparte había otra persona con experiencia con JavaScript y Dart, lo cual hacía que le resultara fácil adaptarse a los proyectos en TypeScript, que es el lenguaje en el que estaban todos los proyectos. Sin embargo, las otras tres personas del equipo tenían muy poca experiencia previa en JavaScript.
+Antes de explicar cómo pasé un proceso en Node.js de 5 horas a 5 minutos, vamos a empezar el contexto de esta historia. Estaba trabajando para un cliente en un equipo de 5 personas, en el que las otras 4 se habían incorporado en los últimos 3 meses, mientras que yo llevaba casi un año con el cliente. En este equipo mi rol era el de Senior Node.js Developer y era el único que tenía experiencia previa trabajando con Node.js. Aparte había otra persona con experiencia con JavaScript y Dart, lo cual hacía que le resultara fácil adaptarse a los proyectos en TypeScript, que es el lenguaje en el que estaban todos los proyectos. Sin embargo, las otras tres personas del equipo tenían muy poca experiencia previa en JavaScript.
 
 Por otro lado, estábamos trabajando en las distintas partes de un motor de facturación que necesitaba ser adaptado para un cambio legislativo. Esto último significa que el deadline no se podía mover, si el cambio no estaba hecho para esa fecha la empresa no podía generar la facturación del siguiente mes. En caso de que no llegáramos le rompíamos el cash flow. Suave, sin presión.
 
@@ -122,7 +122,7 @@ async function readAllUserInfo(userId) {
 }
 ```
 
-Aquí vemos un problema parecido al de antes, pero sin bucles. Aunque es menos dramático, es otro de los sitios de donde podemos rascar performance si utilizamos `Promise.all`, ya que como vemos ninguna de las peticiones depende de la otra, por lo que podríamos pedir toda la información a la vez y así reducir el tiempo que necesita la función para realizar la tarea.
+Aquí vemos un problema parecido al anterior, pero sin bucles. Aunque es menos dramático, es otro de los sitios de donde podemos rascar performance si utilizamos `Promise.all`, ya que como vemos ninguna de las peticiones depende de la otra, por lo que podríamos pedir toda la información a la vez y así reducir el tiempo que necesita la función para realizar la tarea.
 
 ```js
 async function readAllUserInfo(userId) {
@@ -240,3 +240,21 @@ Tras esta experiencia saqué un par de cosas en claro:
 - **Forma a tu equipo**, comparte el conocimiento. Busca tiempo en la semana para poco a poco ir formándolo. En mi experiencia el mob programming ayuda bastante, pero no es suficiente. Algunos conceptos necesitas interiorizarlos y para eso lo mejor es hacer katas o tener formaciones con objetivos concretos. Al principio es bastante duro preparar esta clase de formaciones, pero a medida que las tengas podrás reusarlas a medida que entren personas nuevas o si cambias de proyecto puedes formar a ese nuevo equipo.
 - **No necesitas un ejército de Seniors aka personas experimentadas en X tecnología**. Con que haya un Senior que controle la tecnología es suficiente, pero la responsabilidad tecnológica no debe recaer enteramente en él, por lo que debe compartir el conocimiento.
 - **Sé prescindible.** Si eres prescindible no serás el cuello de botella. Ojo, prescindible que no innecesario. Con esto quiero decir que no seas crítico por conocimiento. Trata siempre de compartir tu conocimiento con el equipo.
+
+Y esta ha sido la historia y el aprendizaje de cómo pasé un proceso en Node.js de 5 horas a 5 minutos.
+
+## Bonus
+
+### 1. No mezcles tipos de asincronía. 
+
+Aparte de ser más difícil de leer, también acaba afectando al performance porque la mayoría de las veces lo que hacemos es complicar el comportamiento asíncrono.
+
+(Meto un ejemplo)
+
+### 2. Async generators, ese gran desconocido
+
+Donde brilla de mala manera es en la gestión de streams. Aparte de eso, el otro caso de uso que más partido le he sacado es leyendo por lotes de una base de datos.
+
+### 3. Investiga sobre el Evento Loop 
+
+Comentar el documento de Node.js que tardaron 6 meses en escribir.
