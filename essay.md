@@ -45,30 +45,47 @@ Tras este refactor vi ciertos patrones que quiero remarcar y mostrar:
 
 ### 1. Evita async innecesarios
 
-Los async cuando los ponemos en una función, estamos automáticamente haciendo que devuelva una promesa, y eso hay que gestionarlo de más. (_Demo async-await/useless-async_)
+```js
+export function randomNumber() {
+    return Math.random()
+}
 
-* Ten en cuenta que cada función asíncrona de por sí devuelve una promesa. Si devuelves una promesa JavaScript tiene que gestionarlo. Comentar ejemplo de jest o incluso hacer un benchmarking.
+export async function asyncRandomNumber() {
+    return Math.random()
+}
+```
+
+Estas dos funciones son idénticas a excepción de que la segunda es asíncrona. Sin ningún motivo, pero es asíncrona. Cada vez que usamos async en una función, estamos automáticamente haciendo que devuelva una promesa, y eso hay que gestionarlo de más. 
+
+Puede parecer una tontería, pero afecta. Hice un pequeño script para demostrar hasta qué punto esto afecta a nuestro performance. Lo que hace el script es ejecutar cada una de estas funciones por separado un millón de veces.
+
+(_Demo async-await/useless-async_)
+
+Como podemos ver, sólo por poner ese `async` hemos hecho que tarde casi seis veces más.
+
+Aplicándolo a la vida real, en una suite de test (bastante grande) reducimos un 40% el tiempo que tardaba en ejecutarse sólo quitando los async innecesarios que se nos habían quedado después de un refactor.
+
 
 ### 2. Evita los await dentro de los bucles.
 
 Imagina que tienes una tarea que hacer que sea en base a una lista de IDs tienes que recuperar información de una API. Por limitaciones técnicas no puedes pasarle a la API la lista de IDs, sino que tienes que hacer una llamada por cada ID. ¿Cuál es la primera idea que se nos viene a la cabeza? Probablemente un bucle, apesta a bucle. La implementación podría ser algo así:
 
-```javascript
+```js
 async function fetchUserListInfo(ids) {
   const values = []
-  for (id of ids) {
+  for (const id of ids) {
     values.push(await fetchUserInfo(id))
   }
   return values
 }
 ```
 
-Parece sencillo y además si lo probamos veremos que funciona. Consigue la información de todos los usuarios sin problemas. ¿Sin problemas? Ese await dentro del `for` fuerza a que se termine de completar cada promesa antes de procesar la siguiente. Esto significa que si de media la API tarda en responder 50ms y tenemos 100 IDS que procesar, tardaremos unos 5 segundos en realizar la tarea. No es que sea un drama, pero si hacemos este ligero cambio la cosa cambia bastante:
+Parece sencillo y además si lo probamos veremos que funciona. Consigue la información de todos los usuarios sin problemas. ¿Sin problemas? Ese await dentro del `for` fuerza a que se termine de completar cada promesa antes de procesar la siguiente. Esto significa que si de media la API tarda en responder 50ms y tenemos 100 IDS que procesar, tardaremos unos 5 segundos en realizar la tarea. No es que sea un drama, pero si implementamos esta otra solución la cosa cambia bastante:
 
-```javascript
+```js
 function fetchUserListInfo(ids) {
   const values = []
-  for (id of ids) {
+  for (const id of ids) {
     values.push(fetchUserInfo(id))
   }
   return Promise.all(values)
@@ -80,11 +97,13 @@ Aquí vemos hay tres sutiles diferencias:
 1. Dentro del for ya no hacemos un await
 1. Devolvemos un Promise.all en vez de los valores como hacíamos antes.
 
-La gran diferencia de esta solución es que dentro del bucle no resolvemos las promesas, sino que simplemente las añadimos a nuestro array en estado *Pending*. Cualquier función que devuelva una promesa la devuelve en este estado que hasta que no uses `await` o `.then` no estará *fulfilled* o *rejected*. Puedes verlo como el experimento del gato de Schrodinger, hasta que no abres la caja no sabes si el gato está vivo o muerto. A las promesas les pasa algo parecido, hasta que no las resuelves están en estado *pending* y una vez resueltas pueden estar *fulfilled*, que es cuando se ha resuelto satisfactoriamente, o *rejected* que es cuando ha habido algún error.
+La gran diferencia de esta solución es que dentro del bucle no resolvemos las promesas, sino que simplemente las añadimos a nuestro array pendiente de ser resueltas. Cualquier función que devuelva una promesa la devuelve en este estado que hasta que no uses `await` o `.then` no estará *fulfilled* o *rejected*. Puedes verlo como el experimento del gato de Schrodinger, hasta que no abres la caja no sabes si el gato está vivo o muerto. A las promesas les pasa algo parecido, hasta que no las resuelves están en estado *pending* y una vez resueltas pueden estar *fulfilled*, que es cuando se ha resuelto satisfactoriamente, o *rejected* que es cuando ha habido algún error.
 
 Volviendo a la solución, vemos que las promesas no se resuelven, sino que se almacenan directamente en estado *Pending* y la función al devolverlas, las resuelve todas *a la vez*. Esto hace que ahora la tarea se haga mucho más rápido, tardando lo que tarde en responderse la llamada a la API más lenta. 
 
-Tengo por aquí otra demo en la que usamos el mismo código, lo único que cambia es la tarea en sí, que lo único que hace es esperar un milisegundo y justo después devolvernos los 4 primeros caracteres del ID, simplemente por hacer algo. Lo que vamos a ver es cuanto tarda cada una de las soluciones ejecutando esta tarea para una lista de 100 IDS y lo va a hacer 1000 veces para que podamos ver si realmente hay una diferencia de performance o no.
+Voy a mostrar otra demo en la que usamos casi el mismo código, lo único que cambia es que en vez de llamar a una API, espera un milisegundo y devolver una string. Lo que vamos a ver es cuanto tarda cada una de las soluciones ejecutando esta tarea para una lista de 100 IDS y lo va a hacer 1000 veces para que podamos ver si realmente hay una diferencia de performance o no.
+
+Como vemos la diferencia es abismal. Para la misma tarea cuando usamos `Promise.all` tarda poco más de 1 segundo, pero cuando usamos `await` dentro del for tarda **casi 2 minutos**.
 
 ### 3. Usa Promise.all siempre que puedas
 
@@ -188,7 +207,7 @@ En esta otra demo hecho a correr estos dos trozos de código cien millones de ve
 
 ### 6. Haz caso de los warnings
 
-En la consola al ejecutar el proceso me salía esto:
+No sé si a alguien más le pasa que la mayoría del tiempo ignoras los warnings y sólo le das importancia cuando son errores. En la consola al ejecutar el proceso me salía esto:
     
 ```shell
 (node) warning: possible EventEmitter memory leak detected. 
@@ -196,7 +215,7 @@ En la consola al ejecutar el proceso me salía esto:
 Use emitter.setMaxListeners() to increase limit.
 ```
 
-Yo pensaba *Meh, es un warning*. En una primera instancia simplemente hice lo que me decía y aumenté los listeners. Sin embargo, hasta que no me dediqué a limpiar los listeners a medida que los usaba no noté la mejora de performance. No era un posible memory leak, era un memory leak en toda regla.
+Yo pensaba *Meh, es un warning*. En una primera instancia simplemente hice lo que me decía y aumenté los listeners sin darle mayor importancia. Sin embargo, el proceso todavía era demasiado lento así que investigué el warning. 
 
 El problema era que había event handlers que se estaban creando continuamente con cada conexión que se solicitaba al pool de conexiones de la base de datos, pero que no se estaban eliminando, siendo el causante del memory leak. Tras implementar el fix en el que cada vez que se devuelve una conexión al pool se limpian los event handlers asociados a la conexión vimos una mejoría en la performance, tardando 4 veces menos de lo que tardaba antes.  
 

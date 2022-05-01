@@ -2,7 +2,7 @@ const commonHeadingsStyle = {
   color: '#0e717f',
   margin: '0',
   padding: '24px 0',
-  textAlign: 'center'
+  textAlign: 'center',
 }
 
 export const GlobalStyle = {
@@ -14,7 +14,19 @@ export const GlobalStyle = {
       width: 'calc(100% - 20vw)',
     },
     p: {
-      textAlign: 'center'
+      textAlign: 'center',
+    },
+    ul: {
+      textAlign: 'left',
+      width: '80%'
+    },
+    ol: {
+      textAlign: 'left',
+      width: '80%'
+    },
+    li: {
+      paddingBottom: '2rem',
+      textAlign: 'left',
     },
     h1: {
       ...commonHeadingsStyle
