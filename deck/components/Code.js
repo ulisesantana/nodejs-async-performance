@@ -5,7 +5,7 @@ const theme = {
   colors: {
     background: "transparent",
     text: "#333",
-    primary: "#4876d6"
+    primary: "#0e717f"
   },
   styles: {
     CodeSurfer: {
