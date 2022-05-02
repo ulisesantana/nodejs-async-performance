@@ -150,7 +150,7 @@ async function readAllUserInfo(userId) {
 }
 ```
 
-Aquí vemos como todas las llamadas se pasan al `Promise.all` y las sacamos por destructuring en el mismo orden en el que se la hemos pasado al `Promise.all`. Como pasó antes, esto tardará lo que tarde la petición más lenta, en vez de tener que esperar por todas una detrás de otra.
+Aquí vemos como todas las llamadas se pasan al `Promise.all` y las sacamos por destructuring en el mismo orden en el que se la hemos pasado. Como pasó antes, esto tardará lo que tarde la petición más lenta, en vez de tener que esperar por todas una detrás de otra.
 
 ### 4. Sé consciente de cuantas promesas estás gestionando
 
@@ -263,7 +263,7 @@ Tras esta experiencia saqué un par de cosas en claro:
 
 Y esta ha sido la historia y el aprendizaje de cómo pasé un proceso en Node.js de 5 horas a 5 minutos.
 
-## Bonus
+## Un par de cosas más
 
 Tengo un par de cosas más en el tintero que no son producto de esta experiencia con *El Proyecto Leñador*, sino del día a día durante los últimos años. Y como tengo tiempo quiero compartirlas.
 

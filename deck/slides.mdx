@@ -18,6 +18,7 @@ import james from "./assets/images/james.jpg"
 import mocha from "./assets/images/mocha-puppy.jpg"
 import nullTheCat from "./assets/images/null.jpg"
 import mochaAndNull from "./assets/images/mocha-and-null.jpg"
+import cjsToESM from "./assets/images/cjs-to-esm.png"
 
 import coffinDance from "./assets/gifs/coffin-dance.gif"
 import sheldonBag from "./assets/gifs/sheldon-bag.gif"
@@ -102,7 +103,6 @@ export const theme = {
 
 <Steps>
 
-1. Se iba a rehacer un proyecto desde cero y habían modificaciones en varios más.
 1. No todo el equipo controlaba la tecnología en la que se estaba trabajando.
 1. El deadline es fijo y crítico, ya que rompemos el cash flow de la empresa en caso de retrasarnos.
 
@@ -262,7 +262,7 @@ describe('This feature should', () => {
 })
 ```
 
-```diff 2[19:23],6[23:28]
+```diff 2[18:23],6[23:28]
 ```
 
 </Code>
@@ -319,11 +319,112 @@ describe('This feature should', () => {
 
 ---
 
+<Code>
+
+  ```js
+  async function readAllUserInfo(userId) {
+    const user = await readUser(userId)
+    const contracts = await readContractsForUser(userId)
+    const invoices = await readInvoicesForUser(userId)
+    return {
+      ...user,
+      contracts,
+      invoices
+    }
+  }
+  ```
+
+  ```js
+  async function readAllUserInfo(userId) {
+    const [ user, contracts, invoices ] = await Promise.all([
+      readUser(userId),
+      readContractsForUser(userId),
+      readInvoicesForUser(userId)
+    ])
+    return {
+      ...user,
+      contracts,
+      invoices
+    }
+  }
+  ```
+
+</Code>
+
+---
+
 # 4. Sé consciente de cuantas promesas estás gestionando
 
 ---
 
+<Code>
+
+```js
+function fetchUserListInfo(ids) {
+  return Promise.all(ids.map(fetchUserInfo))
+}
+```
+
+```js
+import pMap from 'p-map';
+
+function fetchUserListInfo(ids) {
+  return pMap(
+    ids, 
+    fetchUserInfo, 
+    {concurrency: 10}
+  )
+}
+```
+
+</Code>
+
+---
+
+<img
+  src={cjsToESM}
+  alt="De CommonJS a ES Modules"
+/>
+
+---
+
 # 5. Cachear queries
+
+---
+
+<Code>
+
+```js
+function CacheByValue() {
+  let value = undefined
+
+  return {
+    async getNumber() {
+      if (value === undefined) {
+        value = await doSomethingAsync()
+      }
+      return value
+    }
+  }
+}
+```
+
+```js
+function CacheByPromise() {
+  let value = undefined
+
+  return {
+    getNumber() {
+      if (value === undefined) {
+        value = doSomethingAsync()
+      }
+      return value
+    }
+  }
+}
+``` 
+
+</Code>
 
 ---
 
