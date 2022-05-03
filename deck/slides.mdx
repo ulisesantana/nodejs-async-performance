@@ -1,11 +1,11 @@
-import {Split, Steps, Footer, Notes} from 'mdx-deck'
+import {Steps, Footer, Notes} from 'mdx-deck'
 import {
   Code,
-  ProfileImage, 
-  LeanMind, 
-  Row, 
-  GlobalStyle, 
-  FluidContainer, 
+  ProfileImage,
+  LeanMind,
+  Row,
+  GlobalStyle,
+  FluidContainer,
   Footer as SlideFooter
 } from "./components";
 import {isPortrait} from "./helpers"
@@ -23,6 +23,7 @@ import cjsToESM from "./assets/images/cjs-to-esm.png"
 import coffinDance from "./assets/gifs/coffin-dance.gif"
 import sheldonBag from "./assets/gifs/sheldon-bag.gif"
 import pickleRick from "./assets/gifs/pickle-rick.gif"
+import dude from "./assets/gifs/fuck-yeah-dude.gif"
 
 import uselessAsync from "./assets/screenshots/useless-async.png"
 import asyncLoop from "./assets/screenshots/async-loop.png"
@@ -37,9 +38,9 @@ export const theme = {
 
 ## Cómo pasé un proceso en
 
-<img 
-  src={nodeJsLogo} 
-  style={{height: '30vmin'}} 
+<img
+  src={nodeJsLogo}
+  style={{height: '30vmin'}}
   alt="Node.js logo"
 />
 
@@ -106,7 +107,7 @@ export const theme = {
 1. No todo el equipo controlaba la tecnología en la que se estaba trabajando.
 1. El deadline es fijo y crítico, ya que rompemos el cash flow de la empresa en caso de retrasarnos.
 
-</Steps> 
+</Steps>
 
 ---
 
@@ -197,7 +198,7 @@ export const theme = {
     alt="Gif de Sheldon respirando en una bolsa de papel"
     style={{
       width: '45vw'
-    }}  
+    }}
   />
   <img
     src={pickleRick}
@@ -233,8 +234,8 @@ export const theme = {
 
 <Notes>
 
-- Ten en cuenta que cada función asíncrona de por sí devuelve una promesa. 
-- Si devuelves una promesa JavaScript tiene que gestionarlo. 
+- Ten en cuenta que cada función asíncrona de por sí devuelve una promesa.
+- Si devuelves una promesa JavaScript tiene que gestionarlo.
 - En una suite de test (bastante grande) reducimos un 40% el tiempo que tardaba en ejecutarse sólo quitando los async innecesarios
 
 </Notes>
@@ -295,13 +296,13 @@ describe('This feature should', () => {
   }
   ```
 
-  ```diff 1 
+  ```diff 1
   ```
 
-  ```diff 4 
+  ```diff 4
   ```
 
-  ```diff 6 
+  ```diff 6
   ```
 
 </Code>
@@ -370,8 +371,8 @@ import pMap from 'p-map';
 
 function fetchUserListInfo(ids) {
   return pMap(
-    ids, 
-    fetchUserInfo, 
+    ids,
+    fetchUserInfo,
     {concurrency: 10}
   )
 }
@@ -422,7 +423,7 @@ function CacheByPromise() {
     }
   }
 }
-``` 
+```
 
 </Code>
 
@@ -443,3 +444,94 @@ function CacheByPromise() {
 </Code>
 
 ---
+
+## Prototipo original:
+
+~7 minutos
+
+<Steps>
+  <div>
+    <h2>Proyecto Leñador:</h2>
+    <p
+      style={{
+        color: 'green',
+        fontWeight: 'bold'
+      }}
+    >
+      4 minutos y 52 segundos
+    </p>
+  </div>
+</Steps>
+
+---
+
+<img
+  src={dude}
+  alt="La vida puede ser maravillosa cuando todo funciona"
+  style={{
+    width: '60vw'
+  }}
+/>
+
+---
+
+## Prototipo original:
+
+41 minutos y 29 segundos
+
+<Steps>
+  <div>
+    <h2>Proyecto Leñador:</h2>
+    <p
+      style={{
+        color: 'green',
+        fontWeight: 'bold'
+      }}
+    >
+      31 minutos y 56 segundos
+    </p>
+  </div>
+</Steps>
+
+---
+
+<h1
+  style={{
+    fontSize: '20vw',
+    color: 'green'
+  }}
+>
+  - 20%
+</h1>
+
+---
+
+# Aprendizaje
+
+<Steps>
+
+  1. La asincronía en JS está más incomprendida de lo que pensaba
+  1. Forma a tu equipo
+  1. No necesitas un ejército de Seniors aka personas experimentadas en X tecnología
+  1. Sé prescindible
+
+</Steps>
+
+---
+
+# Conclusión
+
+<Steps>
+
+  1. Evita los async innecesarios
+  1. Evita los await dentro de los bucles
+  1. Usa Promise.all siempre que puedas
+  1. Sé consciente de cuantas promesas estás gestionando
+  1. Cachea la promesa en vez del valor que resuelve
+  1. No ignores los warnings
+
+</Steps>
+
+---
+
+# ¡Gracias!

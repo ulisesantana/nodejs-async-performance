@@ -25,7 +25,7 @@ export const GlobalStyle = {
       width: '80%'
     },
     li: {
-      paddingBottom: '2rem',
+      paddingBottom: '1rem',
       textAlign: 'left',
     },
     h1: {

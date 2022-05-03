@@ -250,18 +250,24 @@ Y ya por estar completamente seguros de que había una mejora, ejecutamos una pr
 - Prototipo: 41:29 minutos  
 - *Proyecto Leñador:* 31:56 minutos
 
-Aparte de haber mejorado la sostenibilidad del proyecto, habíamos mejorado la performance más de un 20%. Y todo esto llegando al deadline.
+Aparte de haber mejorado la sostenibilidad del proyecto, habíamos mejorado la performance haciendo que el proceso fuera más de un 20% más rápido. Y todo esto llegando al deadline.
 
 ## Cosas que aprendí
 
-Tras esta experiencia saqué un par de cosas en claro:
+Al final todo salió bien, pero sin duda aprendí un par de cosas de esta experiencia:
 
 - **La asincronía en JS está más incomprendida de lo que pensaba**. La gestión de asincronía en JavaScript es algo que no todo el mundo tiene interiorizado. Todo el mundo usa promesas y el async/await y empezar a trabajar con JavaScript o TypeScript no es tan complicado, lo que sí es más complicado es saber cómo gestionar la asincronía en JavaScript.
 - **Forma a tu equipo**, comparte el conocimiento. Busca tiempo para poco a poco ir formándolo. En mi experiencia el mob programming ayuda bastante, pero no es suficiente. Algunos conceptos necesitas interiorizarlos y para eso lo mejor es hacer katas o tener formaciones con objetivos concretos. Al principio es bastante duro preparar esta clase de formaciones, pero a medida que las tengas podrás reusarlas a medida que entren personas nuevas o si cambias de equipo puedes formar a ese nuevo equipo.
 - **No necesitas un ejército de Seniors aka personas experimentadas en X tecnología**. Con que haya uno o dos Seniors que controle la tecnología es suficiente, pero la responsabilidad tecnológica no debe recaer enteramente en estas personas, por lo que deben compartir el conocimiento.
 - **Sé prescindible.** Si eres prescindible no serás el cuello de botella. Ojo, prescindible que no innecesario. Con esto quiero decir que no seas crítico por conocimiento, ya sea de dominio, procesos o tecnología. Trata siempre de compartir tu conocimiento con el equipo y documentarlo.
 
-Y esta ha sido la historia y el aprendizaje de cómo pasé un proceso en Node.js de 5 horas a 5 minutos.
+Y esta ha sido la historia y el aprendizaje de cómo pasé un proceso en Node.js de 5 horas a 5 minutos. Recapitulando estos son mis 6 consejos cuando gestionas asincronía en JavaScript:
+1. Evita los async innecesarios
+2. Evita los await dentro de los bucles
+3. Usa Promise.all siempre que puedas
+4. Sé consciente de cuantas promesas estás gestionando
+5. Cachea la promesa en vez del valor que resuelve
+6. Haz casos de los warnings.
 
 ## Un par de cosas más
 
