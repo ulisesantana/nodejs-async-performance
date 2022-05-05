@@ -54,20 +54,15 @@ export const theme = {
   textAlign: isPortrait() ? 'center' : 'right',
   width: '100%'
 }}>
-  <ProfileImage
-    src={ulises}
-    size="75vmin"
-    alt="Foto de Ulises Santana"
-  />
 
   <div style={{
-    alignItems: isPortrait() ? 'center' : 'end',
+    alignItems: isPortrait() ? 'center' : 'start',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center'
   }}>
 
-  ## Ulises Santana
+  # Ulises Santana
 
   Full Stack Developer en
 
@@ -75,6 +70,22 @@ export const theme = {
 
   </div>
 
+  <div style={{
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  }}>
+
+  <ProfileImage
+    src={ulises}
+    size="50vmin"
+    alt="Foto de Ulises Santana"
+  />
+
+  # ulisesantana.dev
+
+  </div>
 
 </FluidContainer>
 
@@ -178,17 +189,27 @@ export const theme = {
 ---
 
 <FluidContainer>
-  <ProfileImage
-    src={matteo}
-    alt="Foto de Matteo Collina"
-    size="60vmin"
-  />
+  <div>
+    <ProfileImage
+      src={matteo}
+      alt="Foto de Matteo Collina"
+      size="60vmin"
+    />
 
-  <ProfileImage
-    src={james}
-    alt="Foto de James Snell"
-    size="60vmin"
-  />
+  ## @matteocollina
+
+  </div>
+
+  <div>
+    <ProfileImage
+      src={james}
+      alt="Foto de James Snell"
+      size="60vmin"
+    />
+
+  ## @jasnell
+
+  </div>
 </FluidContainer>
 
 ---
