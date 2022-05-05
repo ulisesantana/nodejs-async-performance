@@ -11,7 +11,9 @@ const theme = {
     CodeSurfer: {
       pre: {
         color: "text",
-        backgroundColor: "background"
+        backgroundColor: "background",
+        fontSize: '4rem',
+        width: '100%'
       },
       code: {
         color: "text",
@@ -38,7 +40,7 @@ const theme = {
       },
       unfocused: {
         // only the opacity of unfocused code can be changed
-        opacity: 0.1
+        opacity: 0.2
       }
     }
   }
