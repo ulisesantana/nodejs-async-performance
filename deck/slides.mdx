@@ -19,6 +19,8 @@ import mocha from "./assets/images/mocha-puppy.jpg"
 import nullTheCat from "./assets/images/null.jpg"
 import mochaAndNull from "./assets/images/mocha-and-null.jpg"
 import cjsToESM from "./assets/images/cjs-to-esm.png"
+import awaitLoop from "./assets/images/await-loop.png"
+import promiseAll from "./assets/images/promise-all.png"
 
 import coffinDance from "./assets/gifs/coffin-dance.gif"
 import sheldonBag from "./assets/gifs/sheldon-bag.gif"
@@ -308,7 +310,21 @@ describe('This feature should', () => {
   }
   ```
 
-  ```js 1:7
+
+</Code>
+
+---
+
+<img
+  src={awaitLoop}
+  alt="Como se resuelven las promesas usando un await dentro de un bucle"
+/>
+
+---
+
+<Code>
+
+  ```js
   function fetchUserListInfo(ids) {
     const values = []
     for (const id of ids) {
@@ -328,6 +344,13 @@ describe('This feature should', () => {
   ```
 
 </Code>
+
+---
+
+<img
+  src={promiseAll}
+  alt="Como se resuelven las promesas usando Promise.all"
+/>
 
 ---
 
@@ -373,6 +396,28 @@ describe('This feature should', () => {
   ```
 
 </Code>
+
+---
+
+<FluidContainer>
+
+<img
+  src={awaitLoop}
+  alt="Como se resuelven las promesas usando un await dentro de un bucle"
+  style={{
+    height: '30vh'
+  }}
+/>
+
+<img
+  src={promiseAll}
+  alt="Como se resuelven las promesas usando Promise.all"
+  style={{
+    height: '30vh'
+  }}
+/>
+
+</FluidContainer>
 
 ---
 
