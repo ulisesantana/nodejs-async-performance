@@ -258,7 +258,7 @@ Al final todo salió bien, pero sin duda aprendí un par de cosas de esta experi
 
 - **La asincronía en JS está más incomprendida de lo que pensaba**. La gestión de asincronía en JavaScript es algo que no todo el mundo tiene interiorizado. Todo el mundo usa promesas y el async/await y empezar a trabajar con JavaScript o TypeScript no es tan complicado, lo que sí es más complicado es saber cómo gestionar la asincronía en JavaScript.
 - **Forma a tu equipo**, comparte el conocimiento. Busca tiempo para poco a poco ir formándolo. En mi experiencia el mob programming ayuda bastante, pero no es suficiente. Algunos conceptos necesitas interiorizarlos y para eso lo mejor es hacer katas o tener formaciones con objetivos concretos. Al principio es bastante duro preparar esta clase de formaciones, pero a medida que las tengas podrás reusarlas a medida que entren personas nuevas o si cambias de equipo puedes formar a ese nuevo equipo.
-- **No necesitas un ejército de Seniors aka personas experimentadas en X tecnología**. Con que haya uno o dos Seniors que controle la tecnología es suficiente, pero la responsabilidad tecnológica no debe recaer enteramente en estas personas, por lo que deben compartir el conocimiento.
+- **La responsabilidad debe ser compartida**. Es bastante típico que las personas con más experiencia del equipo se echen las cosas a la espalda. La responsabilidad debe ser compartida, tanto tecnológica como a nivel de diseño de software o metodologías. La idea es que los miembros del equipo aprendan unos de otros sin importar el nivel de experiencia que tengan. El intercambio de ideas desde distintos puntos de vista puede enriquecer mucho al equipo.
 - **Sé prescindible.** Si eres prescindible no serás el cuello de botella. Ojo, prescindible que no innecesario. Con esto quiero decir que no seas crítico por conocimiento, ya sea de dominio, procesos o tecnología. Trata siempre de compartir tu conocimiento con el equipo y documentarlo.
 
 Y esta ha sido la historia y el aprendizaje de cómo pasé un proceso en Node.js de 5 horas a 5 minutos. Recapitulando estos son mis 6 consejos cuando gestionas asincronía en JavaScript:
@@ -273,16 +273,6 @@ Y esta ha sido la historia y el aprendizaje de cómo pasé un proceso en Node.js
 
 Tengo un par de cosas más en el tintero que no son producto de esta experiencia con *El Proyecto Leñador*, sino del día a día durante los últimos años. Y como tengo tiempo quiero compartirlas.
 
-### 1. No mezcles tipos de asincronía. 
-
-Aparte de ser más difícil de leer, también acaba afectando al performance porque la mayoría de las veces lo que hacemos es complicar el comportamiento asíncrono.
-
-(Meto un ejemplo)
-
-### 2. Async generators, ese gran desconocido
-
-Donde brilla de mala manera es en la gestión de streams. Aparte de eso, el otro caso de uso que más partido le he sacado es leyendo por lotes de una base de datos.
-
-### 3. Investiga sobre el Evento Loop 
-
-Comentar el documento de Node.js que tardaron 6 meses en escribir.
+- No mezcles tipos de asincronía: Aparte de ser más difícil de leer, también acaba afectando al performance porque la mayoría de las veces lo que hacemos es complicar el comportamiento asíncrono.
+- Async generators, ese gran desconocido: En JavaScript existe una cosa llamada generators, de la cual llegó hace un par de años su versión asíncrona. Los async generators donde brillan es al gestionar streams. Sin embargo, hay otros casos de uso que también son muy útiles. Lucciano Mammino dió una charla sobre ellos en la NodeCONF EU en 2019.
+- Investiga sobre el Event Loop: Entender cómo funciona JavaScript por debajo te ayuda a entender por qué a veces las cosas no pasan como esperamos. En la documentación de Node.js hay un apartado de guías en la cual hay una llamada *The Node.js Event Loop, Timers, and process.nextTick()*. Es un documento que tardaron 6 meses en escribir y que explica los diferentes procesos y el orden en el que se ejecutan en cada vuelta del Event Loop en Node.js.
