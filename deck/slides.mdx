@@ -8,7 +8,6 @@ import {
   FluidContainer,
   Footer as SlideFooter
 } from "./components";
-import {isPortrait} from "./helpers"
 
 import nodeJsLogo from "./assets/images/node-js-logo.svg"
 import lumberjackImage from "./assets/images/lumberjack.jpeg"
@@ -52,13 +51,13 @@ export const theme = {
 
 <FluidContainer style={{
   alignContent: 'center',
-  justifyContent: isPortrait() ? 'center' : 'space-around' ,
-  textAlign: isPortrait() ? 'center' : 'right',
+  justifyContent: 'space-around' ,
+  textAlign: 'right',
   width: '100%'
 }}>
 
   <div style={{
-    alignItems: isPortrait() ? 'center' : 'start',
+    alignItems: 'start',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center'

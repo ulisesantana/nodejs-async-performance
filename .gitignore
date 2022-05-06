@@ -6,3 +6,4 @@ node_modules
 demo/*.txt
 *.DS_Store
 *.jpg:Zone.Identifier
+public
