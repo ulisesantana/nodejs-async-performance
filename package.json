@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "mdx-deck -h 0.0.0.0 deck/slides.mdx",
-    "build": "rm -rf docs && mdx-deck build deck/slides.mdx && cp deck/assets/slides.pdf public/slides.pdf && mv public docs",
+    "build": "mdx-deck build deck/slides.mdx && cp deck/assets/slides.pdf public/slides.pdf",
     "test": "echo \"there are no tests\""
   },
   "type": "module",
