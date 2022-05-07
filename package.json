@@ -11,9 +11,6 @@
     "code-surfer": "3.1.0",
     "mdx-deck": "4.1.1"
   },
-  "engines": {
-    "node": "^14"
-  },
   "name": "nodejs-async-performance",
   "dependencies": {
     "styled-components": "^5.3.1"
