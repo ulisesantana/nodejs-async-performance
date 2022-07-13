@@ -211,7 +211,7 @@ export const theme = {
 
 <Notes>
 
-- El proyecto no se podía replantear 
+- El proyecto no se podía replantear
 - Habían otros 4 proyectos
 - Llevo toda mi vida preparándome para este momento, los talleres sobre asincronía en Node.js con Matteo Collina y James Snell van a dar sus frutos
 
@@ -514,54 +514,7 @@ function fetchUserListInfo(ids) {
 
 ---
 
-# 5. Cachear queries
-
----
-
-<Code>
-
-```js
-function CacheByValue() {
-  let value = undefined
-
-  return {
-    async getNumber() {
-      if (value === undefined) {
-        value = await doSomethingAsync()
-      }
-      return value
-    }
-  }
-}
-```
-
-```js
-function CacheByPromise() {
-  let value = undefined
-
-  return {
-    getNumber() {
-      if (value === undefined) {
-        value = doSomethingAsync()
-      }
-      return value
-    }
-  }
-}
-```
-
-</Code>
-
----
-
-<img
-  src={cachedPromises}
-  alt="Resultado demo cached-promises"
-/>
-
----
-
-# 6. Haz caso de los warnings
+# 5. Haz caso de los warnings
 
 ---
 
@@ -577,7 +530,7 @@ function CacheByPromise() {
 
 <Notes>
 
-- El problema era que había event handlers que se estaban creando continuamente con cada conexión que se solicitaba al pool de conexiones de la base de datos, pero que no se estaban eliminando, siendo el causante del memory leak. Tras implementar el fix en el que cada vez que se devuelve una conexión al pool se limpian los event handlers asociados a la conexión vimos una mejoría en la performance, tardando 4 veces menos de lo que tardaba antes.  
+- El problema era que había event handlers que se estaban creando continuamente con cada conexión que se solicitaba al pool de conexiones de la base de datos, pero que no se estaban eliminando, siendo el causante del memory leak. Tras implementar el fix en el que cada vez que se devuelve una conexión al pool se limpian los event handlers asociados a la conexión vimos una mejoría en la performance, tardando 4 veces menos de lo que tardaba antes.
 
 </Notes>
 
@@ -665,7 +618,6 @@ function CacheByPromise() {
   1. Evita los await dentro de los bucles
   1. Usa Promise.all siempre que puedas
   1. Sé consciente de cuantas promesas estás gestionando
-  1. Cachea la promesa en vez del valor que resuelve
   1. No ignores los warnings
 
 </Steps>
@@ -695,5 +647,5 @@ function CacheByPromise() {
 
 # ¡Gracias!
 
-## bit.ly/js-day-nodejs-async-performance
-## bit.ly/js-day-nodejs-async-performance-transcription
+## bit.ly/nodejs-async-performance-slides
+## bit.ly/nodejs-async-performance-post

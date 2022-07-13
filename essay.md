@@ -180,54 +180,9 @@ La diferencia usando `p-map` es que tienes que pasar por separado la lista sobre
 
 Por último, tener en cuenta que `p-map` en su versión 5 pasó a ser de tipo ESModules y a menos que tu proyecto esté hecho de esta manera no te va a funcionar. Para poder usarlo con CommonJS necesitas tirar de la versión 4. La realidad es que ambas versiones sólo difieren en si funcionan con ESModules o con CommonJS. Vamos, que si importas cosas en ficheros con `import` o con `require` respectivamente.
 
-### 5. Cachear queries
+### 5. Haz caso de los warnings
 
-Esto no es exclusivo de Node.js, pero era algo que no estábamos haciendo y que podía ayudar, ya que había ciertos datos que no cambiaban durante la ejecución y que no venía mal tenerlos cacheados. 
-
-Lo que sí es exclusivo de Node.js es cómo cachear esta clase de datos. No cacheas el valor, sino la promesa que te devuelve. Ya después cuando coges la promesa cacheada la resuelves y sigues trabajando con normalidad.
-
-Cacheando por valor: 
-```js
-function CacheByValue() {
-  let value = undefined
-
-  return {
-    async getNumber() {
-      if (value === undefined) {
-        value = await doSomethingAsync()
-      }
-      return value
-    }
-  }
-}
-``` 
-
-Cacheando por promesa: 
-```js
-function CacheByPromise() {
-  let value = undefined
-
-  return {
-    getNumber() {
-      if (value === undefined) {
-        value = doSomethingAsync()
-      }
-      return value
-    }
-  }
-}
-``` 
-
-Aquí vemos cómo serían las implementaciones de gestión de cache, una por valor y la otra por promesa. Como vemos, la única diferencia es la asignación a la variable la primera vez que se solicita el recurso. En un caso usa el await, en el otro no. 
-
-(_Demo best-practices/cached-promises_)
-
-En esta otra demo hecho a correr estos dos trozos de código cien millones de veces para ver si realmente hay diferencia. La realidad es que la hay y es recomendable cachear la promesa en vez del valor si queremos seguir rascando performance. 
-
-
-### 6. Haz caso de los warnings
-
-No sé si a alguien más le pasa que la mayoría del tiempo ignoras los warnings y sólo le das importancia cuando son errores. En la consola al ejecutar el proceso me salía esto:
+No sé si a alguien más le pasa que la mayoría del tiempo ignoras los warnings y solo le das importancia cuando son errores. En la consola al ejecutar el proceso me salía esto:
     
 ```shell
 (node) warning: possible EventEmitter memory leak detected. 
