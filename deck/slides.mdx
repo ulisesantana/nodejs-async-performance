@@ -411,6 +411,50 @@ describe('This feature should', () => {
   alt="Resultado demo async-loop"
 />
 
+
+---
+
+<Code>
+
+  ```ts
+  async function fetchUserInfo(id): User {
+    try {
+      const response = await fetch(`https://api.awesome-project.com/user/${id}`)
+      return User.fromResponse(response)
+    } catch(err) {
+      console.error(`Error fetching user ${id}`)
+      console.error(err.message)
+      console.error(err.stack)
+      return new NullUser()
+    }
+  }
+  ```
+
+  ```diff 1[32:39],2,4,5,9,10
+  ```
+
+</Code>
+
+---
+
+<Code>
+
+  ```ts
+  type PromiseAllSettleReturnValue<T> = Array<{
+    status: 'fulfilled' | 'rejected',
+    value?: T,
+    reason?: Error
+  }>
+  ```
+
+  ```diff 2[1:21],3
+  ```
+
+  ```diff 2[1:10,24:33],4
+  ```
+
+</Code>
+
 ---
 
 # 3. Usa Promise.all siempre que puedas
