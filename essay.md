@@ -116,6 +116,32 @@ Para ver esto mejor voy a mostrar otra demo en la que usamos casi el mismo códi
 
 Como vemos la diferencia es abismal. Para la misma tarea cuando usamos `Promise.all` tarda poco más de 1 segundo, pero cuando usamos `await` dentro del for tarda **casi 2 minutos**. Esta diferencia en un entorno real es crítica y lo peor es que por lo general no nos damos cuenta de que el problema está en esta clase de sitios.
 
+Algo a tener en cuenta sobre el `Promise.all`; en caso de que alguna promesa lance un error parará el Promise.all dejando promesas sin cumplir. Para evitar esto el método que nos devuelve la promesa debe tener su propio try/catch y gestionar el error. Por ejemplo:
+
+```ts
+async function fetchUserInfo(id): User {
+  try {
+    const response = await fetch(`https://api.awesome-project.com/user/${id}`)
+    return User.fromResponse(response)
+  } catch(err) {
+    console.error(`Error fetching user ${id}`)
+    console.error(err.message)
+    console.error(err.stack)
+    return new NullUser()
+  }
+}
+```
+
+También existe el `Promise.allSettled` que evita que el error pare el proceso de resolver todas las promesas. Otra diferencia es que lo que nos devuelve esta estructura:
+
+```ts
+type PromiseAllSettleReturnValue<T> = Array<{
+  status: 'fulfilled' | 'rejected',
+  value?: T,
+  reason?: Error
+}>
+```
+
 ### 3. Usa Promise.all siempre que puedas
 
 En nuestro día a día desarrollando soluciones de software nos encontramos que en más de una ocasión necesitamos varios recursos de diferentes sitios, ya sean tablas, bases de datos o APIs. Todo esto además tiene una naturaleza asícrona y necesitamos gestionarla.
