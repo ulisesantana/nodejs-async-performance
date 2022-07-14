@@ -4,7 +4,7 @@
   "scripts": {
     "start": "mdx-deck -h 0.0.0.0 deck/slides.mdx",
     "build": "mdx-deck build deck/slides.mdx && cp deck/assets/slides.pdf public/slides.pdf",
-    "serve": "npx serve public",
+    "serve": "serve public",
     "test": "echo \"there are no tests\""
   },
   "type": "module",
@@ -14,6 +14,7 @@
   },
   "name": "nodejs-async-performance",
   "dependencies": {
+    "serve": "^14.0.1",
     "styled-components": "^5.3.1"
   }
 }
