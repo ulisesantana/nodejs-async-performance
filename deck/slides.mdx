@@ -90,6 +90,16 @@ export const theme = {
 
 </FluidContainer>
 
+
+<Notes>
+
+- LeanMind nos integramos en otros equipos para ayudarles a que sus proyectos sean sostenibles.
+- Twitter & Github en la parte inferior de cada diapositiva.
+- Mi blog.
+- Soy de GC, pero me mudé a El Hierro.
+
+</Notes>
+
 ---
 
 <Row alignCenter>
@@ -111,13 +121,6 @@ export const theme = {
   style={{height: '40vmin'}}
 />
 
-<Notes>
-
-- ¿Cómo era el equipo?
-- El deadline
-
-</Notes>
-
 ---
 
 # Contexto
@@ -129,9 +132,24 @@ export const theme = {
 
 </Steps>
 
+<Notes>
+
+- ¿Cómo era el equipo? 5 personas.
+- El deadline
+
+</Notes>
+
 ---
 
 # *Dame 6 horas para cortar un árbol y pasaré 4 afilando el hacha*
+
+<Notes>
+
+- A Abraham Lincoln se le atribuye esta frase
+- ¿En qué estado estaba el prototipo?
+- Nos dieron luz verde para rehacer de cero el prototipo. 
+
+</Notes>
 
 ---
 
@@ -145,7 +163,8 @@ export const theme = {
 
 <Notes>
 
-- El reparto de los proyectos
+- El gobierno no confirmó hasta 3 meses antes. 
+- El reparto de los proyectos 
 - Descuido del proceso de code review por sobrecarga
 - ¿Quién hizo el Proyecto Leñador?
 - Comparación de legibilidad entre Proyecto Leñador y prototipo
@@ -173,6 +192,12 @@ export const theme = {
     </p>
   </div>
 </Steps>
+
+<Notes>
+
+- Hicimos una prueba con unos cientos de miles de registros.
+
+</Notes>
 
 ---
 
@@ -271,7 +296,7 @@ export const theme = {
 <Notes>
 
 - Entré en modo pánico y empecé a refactorizar
-- Tras este refactor vi ciertos patrones que quiero remarcar y mostrar cómo podemos darles la vuelta para convertirlos en best practices
+- Tras este refactor vi ciertos patrones que quiero remarcar y mostrar cómo podemos darles la vuelta para convertirlos en best practices.
 
 </Notes>
 
@@ -332,13 +357,22 @@ describe('This feature should', () => {
 
 </Code>
 
+<Notes>
+
+- Pasamos de 2:10 a 1:30 quitando los async.
+
+</Notes>
+
 ---
 
 # 2. Evita los await dentro de los bucles
 
 <Notes>
 
+- Este consejo es el buque insignia de esta charla
 - En base a una lista de IDs tienes que recuperar información de una API
+- La API no acepta listas, sino que tienes que pedirlos de uno en uno.
+- ¿Cuál sería la primera solución que se nos vendría a la cabeza?
 
 </Notes>
 
@@ -393,7 +427,7 @@ describe('This feature should', () => {
 
 <Notes>
 
-- Promesas de Schrodinger
+- ¿Qué es lo que hay en ese Array? Promesas de Schrodinger
 
 </Notes>
 
@@ -411,6 +445,11 @@ describe('This feature should', () => {
   alt="Resultado demo async-loop"
 />
 
+<Notes>
+
+- Puedes acabar haciéndote un ataque de denegación de servicio al bloquear el event loop.
+
+</Notes>
 
 ---
 
@@ -435,6 +474,14 @@ describe('This feature should', () => {
 
 </Code>
 
+<Notes>
+
+- Si una promesa falla, se aborta el Promise.all, dejando promesas a medio.
+- En el ejemplo se devuelve siempre algo con lo que se pueda trabajar
+- En el mundo real ese array habría que filtrarlo antes de empezar a trabajar con él.
+
+</Notes>
+
 ---
 
 <Code>
@@ -454,6 +501,12 @@ describe('This feature should', () => {
   ```
 
 </Code>
+
+<Notes>
+
+- Aquí igualmente hay que gestionar el array antes de usarlo.
+
+</Notes>
 
 ---
 
@@ -517,7 +570,7 @@ describe('This feature should', () => {
 
 <Notes>
 
-- Uasr Promise.all es muy goloso, por eso tienes que ser consciente de cuantas promesas estás gestionando.
+- Usar Promise.all es muy goloso, por eso tienes que ser consciente de cuantas promesas estás gestionando.
 
 </Notes>
 
@@ -549,12 +602,26 @@ function fetchUserListInfo(ids) {
 
 </Code>
 
+<Notes>
+
+- No sabes cuantos IDS te van a pasar. Te podrías hacer un ataque de denegación de servicio a ti mismo.
+- La concurrency que usábamos era el límite de conexiones de base de datos.
+
+</Notes>
+
 ---
 
 <img
   src={cjsToESM}
   alt="De CommonJS a ES Modules"
 />
+
+<Notes>
+
+- Usas CommonJS -> version 4 
+- Usas ESM -> version 5 
+
+</Notes>
 
 ---
 
@@ -574,6 +641,7 @@ function fetchUserListInfo(ids) {
 
 <Notes>
 
+- Que levante la mano el que ha ignorado un warning.
 - El problema era que había event handlers que se estaban creando continuamente con cada conexión que se solicitaba al pool de conexiones de la base de datos, pero que no se estaban eliminando, siendo el causante del memory leak. Tras implementar el fix en el que cada vez que se devuelve una conexión al pool se limpian los event handlers asociados a la conexión vimos una mejoría en la performance, tardando 4 veces menos de lo que tardaba antes.
 
 </Notes>
@@ -598,6 +666,13 @@ function fetchUserListInfo(ids) {
   </div>
 </Steps>
 
+
+<Notes>
+
+- Cuando vi el resultado me sentí tal que así
+
+</Notes>
+
 ---
 
 <img
@@ -607,6 +682,12 @@ function fetchUserListInfo(ids) {
     width: '60vw'
   }}
 />
+
+<Notes>
+
+- No sabía si era de día o de noche, pero fue épico.
+
+</Notes>
 
 ---
 
